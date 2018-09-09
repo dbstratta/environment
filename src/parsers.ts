@@ -1,11 +1,15 @@
-import { isEmail, isIP, isPort, isURL } from 'validator';
+import { isEmail, isInt, isIP, isPort, isURL } from 'validator';
 
 export type Parser<TReturn = any> = (serializedValue: string) => TReturn;
 
 export const string: Parser<string> = serializedValue => serializedValue;
 
 export const integer: Parser<number> = serializedValue => {
-  const value = parseInt(serializedValue, 10);
+  if (!isInt(serializedValue)) {
+    throw new Error('value is not an integer');
+  }
+
+  const value = Number.parseInt(serializedValue, 10);
 
   if (Number.isNaN(value)) {
     throw new Error('value is not a number');
@@ -15,7 +19,7 @@ export const integer: Parser<number> = serializedValue => {
 };
 
 export const float: Parser<number> = serializedValue => {
-  const value = parseFloat(serializedValue);
+  const value = Number.parseFloat(serializedValue);
 
   if (Number.isNaN(value)) {
     throw new Error('value is not a number');

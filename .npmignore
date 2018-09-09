@@ -5,3 +5,5 @@ dist/**/*.test.*
 !src/**/*
 !package.json
 !README.md
+!LICENSE
+!CHANGELOG.md

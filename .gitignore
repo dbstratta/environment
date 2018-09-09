@@ -9,7 +9,6 @@ dist
 
 # Misc
 .env
-/keys
 *.pyc
 .DS_Store
 .idea
