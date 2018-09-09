@@ -1,4 +1,4 @@
 {
-  "prettier.tslintIntegration": true,
-  "markdown.extension.toc.levels": "2..6"
+  "markdown.extension.toc.levels": "2..6",
+  "jest.autoEnable": false
 }

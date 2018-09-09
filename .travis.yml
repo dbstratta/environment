@@ -3,7 +3,7 @@ sudo: false
 stages:
   - lint
   - test
-  - name: publish
+  - name: release
     if: branch = master
 
 node_js_defaults: &node_js_defaults
@@ -18,12 +18,19 @@ jobs:
   include:
     - stage: lint
       <<: *node_js_defaults
-      script: yarn lint
+      script: yarn lint:ci
 
     - stage: test
       <<: *node_js_defaults
-      script: yarn test
+      node_js:
+        - '10'
+        - '9'
+        - '8'
+      script: yarn test:ci
 
-    - stage: publish
+    - stage: release
       <<: *node_js_defaults
-      script: exit 0
+      script: yarn build
+      deploy:
+        provider: script
+        script: yarn semantic-release

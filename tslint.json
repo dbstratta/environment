@@ -6,10 +6,11 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    "prettier": true,
     "object-literal-sort-keys": false
   },
-  "rulesDirectory": [],
+  "rulesDirectory": ["tslint-plugin-prettier"],
   "linterOptions": {
-    "exclude": ["node_modules", "src/typings/**/*.d.ts"]
+    "exclude": ["node_modules"]
   }
 }

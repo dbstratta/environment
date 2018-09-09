@@ -14,6 +14,7 @@ Environment variable configuration for Node.js made easy.
 - [API](#api)
 - [Recipes](#recipes)
   - [Usage with dotenv](#usage-with-dotenv)
+  - [Usage with webpack](#usage-with-webpack)
 - [Node.js support](#nodejs-support)
 - [Maintainers](#maintainers)
 - [Related libraries](#related-libraries)
@@ -86,7 +87,7 @@ const env = makeEnv({
 ```bash
 node env.js
 
-Error: NOT_SET is required but is not set
+EnvironmentVariableError: NOT_SET is required but is not set
     at ...
     ...
 ```
@@ -96,6 +97,12 @@ Error: NOT_SET is required but is not set
 ## Recipes
 
 ### Usage with [dotenv](https://github.com/motdotla/dotenv)
+
+TODO
+
+### Usage with [webpack](https://github.com/webpack/webpack)
+
+TODO
 
 ## Node.js support
 

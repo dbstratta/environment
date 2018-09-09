@@ -1,12 +1,10 @@
 import { isEmail, isIP, isPort, isURL } from 'validator';
 
-export type Parser = (serializedValue: string) => any;
+export type Parser<TReturn = any> = (serializedValue: string) => TReturn;
 
-export function string(serializedValue: string): string {
-  return serializedValue;
-}
+export const string: Parser<string> = serializedValue => serializedValue;
 
-export function integer(serializedValue: string): number {
+export const integer: Parser<number> = serializedValue => {
   const value = parseInt(serializedValue, 10);
 
   if (Number.isNaN(value)) {
@@ -14,9 +12,9 @@ export function integer(serializedValue: string): number {
   }
 
   return value;
-}
+};
 
-export function float(serializedValue: string): number {
+export const float: Parser<number> = serializedValue => {
   const value = parseFloat(serializedValue);
 
   if (Number.isNaN(value)) {
@@ -24,9 +22,9 @@ export function float(serializedValue: string): number {
   }
 
   return value;
-}
+};
 
-export function email(serializedValue: string): string {
+export const email: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isEmail(value)) {
@@ -34,9 +32,9 @@ export function email(serializedValue: string): string {
   }
 
   return value;
-}
+};
 
-export function url(serializedValue: string): string {
+export const url: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isURL(value)) {
@@ -44,9 +42,9 @@ export function url(serializedValue: string): string {
   }
 
   return value;
-}
+};
 
-export function ipAddress(serializedValue: string): string {
+export const ipAddress: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isIP(value)) {
@@ -54,9 +52,9 @@ export function ipAddress(serializedValue: string): string {
   }
 
   return value;
-}
+};
 
-export function port(serializedValue: string): string {
+export const port: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isPort(value)) {
@@ -64,10 +62,12 @@ export function port(serializedValue: string): string {
   }
 
   return value;
-}
+};
 
-export function whitelist(whitelistedValues: ReadonlyArray<string>): Parser {
-  function whitelistParser(serializedValue: string): any {
+export function whitelist(
+  whitelistedValues: ReadonlyArray<string>,
+): Parser<string> {
+  const whitelistParser: Parser<string> = serializedValue => {
     const value = serializedValue;
 
     if (!whitelistedValues.includes(value)) {
@@ -75,12 +75,12 @@ export function whitelist(whitelistedValues: ReadonlyArray<string>): Parser {
     }
 
     return value;
-  }
+  };
 
   return whitelistParser;
 }
 
-export function positiveInteger(serializedValue: string): number {
+export const positiveInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value <= 0) {
@@ -88,9 +88,9 @@ export function positiveInteger(serializedValue: string): number {
   }
 
   return value;
-}
+};
 
-export function nonPositiveInteger(serializedValue: string): number {
+export const nonPositiveInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value > 0) {
@@ -98,9 +98,9 @@ export function nonPositiveInteger(serializedValue: string): number {
   }
 
   return value;
-}
+};
 
-export function negativeInteger(serializedValue: string): number {
+export const negativeInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value >= 0) {
@@ -108,9 +108,9 @@ export function negativeInteger(serializedValue: string): number {
   }
 
   return value;
-}
+};
 
-export function nonNegativeInteger(serializedValue: string): number {
+export const nonNegativeInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value < 0) {
@@ -118,4 +118,4 @@ export function nonNegativeInteger(serializedValue: string): number {
   }
 
   return value;
-}
+};

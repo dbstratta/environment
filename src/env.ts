@@ -23,7 +23,7 @@ export type SchemaEntryRequiredInfo = Readonly<
       /**
        * The default value of the environment variable.
        */
-      defaultEnvVarValue: any;
+      defaultEnvVarValue: string;
     }
 >;
 
@@ -56,6 +56,12 @@ function getValue(key: string, schemaEntry: SchemaEntry): any {
       );
     }
 
+    if (typeof schemaEntry.defaultEnvVarValue !== 'string') {
+      throw new TypeError(
+        `expected defaultEnvVarValue to be of type \`string\` but received type \`${typeof schemaEntry.defaultEnvVarValue}\``,
+      );
+    }
+
     serializedValue = schemaEntry.defaultEnvVarValue;
   } else {
     serializedValue = envVarValue;
@@ -66,9 +72,9 @@ function getValue(key: string, schemaEntry: SchemaEntry): any {
     value = schemaEntry.parse(serializedValue);
   } catch (error) {
     throw new EnvironmentVariableError(
-      `${key} has invalid format. ${
+      `${key} has invalid format. Reason: ${
         (error as Error).message
-      }. got ${serializedValue}`,
+      }. Got: '${serializedValue}'`,
     );
   }
 

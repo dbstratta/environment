@@ -1,1 +1,7 @@
-node_modules
+*
+dist/**/*.test.*
+
+!dist/**/*
+!src/**/*
+!package.json
+!README.md

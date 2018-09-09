@@ -5,6 +5,7 @@
     "strict": true,
     "target": "ESNext",
     "outDir": "dist",
+    "noEmitOnError": true,
     "removeComments": true,
     "esModuleInterop": true,
     "sourceMap": true,
@@ -15,9 +16,10 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": false,
     "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
