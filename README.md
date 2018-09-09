@@ -1,6 +1,9 @@
 # Env
 
 [![Travis](https://img.shields.io/travis/com/strattadb/env/develop.svg?style=for-the-badge)](https://travis-ci.com/strattadb/env)
+[![npm](https://img.shields.io/npm/dm/@strattadb/env.svg?style=for-the-badge)](https://www.npmjs.com/package/@strattadb/env)
+[![Codecov](https://img.shields.io/codecov/c/github/strattadb/env/develop.svg?style=for-the-badge)](https://codecov.io/gh/strattadb/env)
+[![David](https://img.shields.io/david/strattadb/env.svg?style=for-the-badge)](https://david-dm.org/strattadb/env)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
 
 Environment variable configuration for Node.js made easy.
@@ -11,6 +14,7 @@ Environment variable configuration for Node.js made easy.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Examples](#examples)
+  - [Making environment variables required](#making-environment-variables-required)
 - [API](#api)
 - [Recipes](#recipes)
   - [Usage with dotenv](#usage-with-dotenv)
@@ -67,6 +71,8 @@ console.log(env.port); // '4000'
 
 ## Examples
 
+### Making environment variables required
+
 If `required` is `true` and the environment variable isn't set,
 it'll throw:
 
@@ -118,4 +124,4 @@ Node.js version 8 or higher.
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](LICENSE)
