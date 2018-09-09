@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "charset": "utf8",
+    "module": "commonjs",
+    "strict": true,
+    "target": "ESNext",
+    "outDir": "dist",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "noErrorTruncation": true,
+    "declaration": true,
+    "declarationDir": "dist",
+    "declarationMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

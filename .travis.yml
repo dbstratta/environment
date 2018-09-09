@@ -1,0 +1,29 @@
+sudo: false
+
+stages:
+  - lint
+  - test
+  - name: publish
+    if: branch = master
+
+node_js_defaults: &node_js_defaults
+  language: node_js
+  node_js: '10'
+  cache:
+    yarn: true
+    directories:
+      - node_modules
+
+jobs:
+  include:
+    - stage: lint
+      <<: *node_js_defaults
+      script: yarn lint
+
+    - stage: test
+      <<: *node_js_defaults
+      script: yarn test
+
+    - stage: publish
+      <<: *node_js_defaults
+      script: exit 0
