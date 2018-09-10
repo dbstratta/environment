@@ -1,9 +1,9 @@
-# env
+# environment
 
-[![Travis](https://img.shields.io/travis/com/strattadb/env/develop.svg?style=for-the-badge)](https://travis-ci.com/strattadb/env)
-[![npm](https://img.shields.io/npm/dm/@strattadb/env.svg?style=for-the-badge)](https://www.npmjs.com/package/@strattadb/env)
-[![Codecov](https://img.shields.io/codecov/c/github/strattadb/env/develop.svg?style=for-the-badge)](https://codecov.io/gh/strattadb/env)
-[![David](https://img.shields.io/david/strattadb/env.svg?style=for-the-badge)](https://david-dm.org/strattadb/env)
+[![Travis](https://img.shields.io/travis/com/strattadb/environment/develop.svg?style=for-the-badge)](https://travis-ci.com/strattadb/environment)
+[![npm](https://img.shields.io/npm/dm/@strattadb/environment.svg?style=for-the-badge)](https://www.npmjs.com/package/@strattadb/environment)
+[![Codecov](https://img.shields.io/codecov/c/github/strattadb/environment/develop.svg?style=for-the-badge)](https://codecov.io/gh/strattadb/environment)
+[![David](https://img.shields.io/david/strattadb/environment.svg?style=for-the-badge)](https://david-dm.org/strattadb/environment)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
 
 Environment variable configuration for Node.js made easy.
@@ -14,7 +14,7 @@ Every application needs to ensure that some environment variables are
 set from the beginning, and checking if the value in `process.env` is undefined
 every time is needed gets tedious very fast.
 
-`env` allows applications to ensure required env variables are set and are valid according
+`environment` allows applications to ensure required env variables are set and are valid according
 to your definition of valid. See [how to use it](#usage).
 
 ## Table of Contents
@@ -58,13 +58,13 @@ to your definition of valid. See [how to use it](#usage).
 With Yarn:
 
 ```bash
-yarn add @strattadb/env
+yarn add @strattadb/environment
 ```
 
 or with npm:
 
 ```bash
-npm install --save @strattadb/env
+npm install --save @strattadb/environment
 ```
 
 ## Usage
@@ -72,11 +72,11 @@ npm install --save @strattadb/env
 An example `env.js` file:
 
 ```javascript
-import { makeEnv, parsers } from '@strattadb/env';
+import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   environment: {
-    parse: parsers.whitelist(['production', 'development']),
+    parse: parsers.whitelist(['production', 'development', 'test']),
     required: true,
     envVarName: 'NODE_ENV',
   },
@@ -84,7 +84,7 @@ const env = makeEnv({
     parse: parsers.port,
     required: false,
     defaultEnvVarValue: '4000',
-    envVarName: 'NODE_ENV',
+    envVarName: 'PORT',
   },
 });
 
@@ -110,7 +110,7 @@ it'll throw:
 ```javascript
 // env.js
 
-import { makeEnv, parsers } from '@strattadb/env';
+import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   notSet: {
@@ -134,7 +134,7 @@ EnvironmentVariableError: NOT_SET is required but is not set
 If the env variable is not required you must specify a default value:
 
 ```javascript
-import { makeEnv, parsers } from '@strattadb/env';
+import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   port: {
@@ -155,7 +155,7 @@ The value you return is what you'll get in the env object.
 If the value is not valid you should throw an error:
 
 ```javascript
-import { makeEnv, parsers } from '@strattadb/env';
+import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   someValue: {
@@ -274,7 +274,7 @@ const dotenv = require('dotenv');
 
 dotenv.config(); // Loads env variables from `.env` file to `process.env`.
 
-const { makeEnv, parsers } = require('@strattadb/env');
+const { makeEnv, parsers } = require('@strattadb/environment');
 
 const env = makeEnv({
   secretToken: {

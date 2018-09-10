@@ -26,7 +26,9 @@ jobs:
         - '10'
         - '9'
         - '8'
-      script: yarn test:ci
+      script:
+        - yarn test:ci
+        - yarn coverage
 
     - stage: release
       <<: *node_js_defaults

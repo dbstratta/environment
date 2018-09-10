@@ -1,12 +1,12 @@
 {
-  "name": "@strattadb/env",
+  "name": "@strattadb/environment",
   "version": "0.0.3",
   "description": "Environment variable configuration for Node.js made easy",
   "main": "dist/index.js",
-  "homepage": "https://github.com/strattadb/env",
+  "homepage": "https://github.com/strattadb/environment",
   "repository": {
     "type": "git",
-    "url": "https://github.com/strattadb/env.git"
+    "url": "https://github.com/strattadb/environment.git"
   },
   "scripts": {
     "build": "yarn tsc",
@@ -16,12 +16,12 @@
     "tsc": "tsc",
     "lint": "tslint --project .",
     "lint:fix": "yarn lint --fix",
-    "lint:ci": "yarn lint && commitlint-travis",
+    "lint:ci": "yarn lint",
     "prelint:ci": "yarn typecheck",
+    "lint:travis": "yarn lint:ci && commitlint-travis",
     "test": "jest",
     "test:watch": "yarn test --onlyChanged --watch",
-    "test:ci": "yarn test --ci --coverage",
-    "posttest:ci": "yarn coverage",
+    "test:ci": "yarn test --verbose --ci --coverage",
     "coverage": "codecov",
     "commit": "commit",
     "semantic-release": "semantic-release"
@@ -41,7 +41,7 @@
     "url": "https://diegostratta.com"
   },
   "bugs": {
-    "url": "https://github.com/strattadb/env/issues",
+    "url": "https://github.com/strattadb/environment/issues",
     "email": "strattadb@gmail.com"
   },
   "types": "dist/index.d.ts",

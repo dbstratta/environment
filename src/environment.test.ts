@@ -1,4 +1,4 @@
-import { makeEnv } from './env';
+import { makeEnv } from './environment';
 import * as parsers from './parsers';
 
 describe('makeEnv', () => {
