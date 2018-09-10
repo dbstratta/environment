@@ -15,7 +15,7 @@ set from the beginning, and checking if the value in `process.env` is undefined
 every time is needed gets tedious very fast.
 
 `env` allows applications to ensure required env variables are set and are valid according
-to your definition of valid. See the [usage](#usage).
+to your definition of valid. See [how to use it](#usage).
 
 ## Table of Contents
 
@@ -28,6 +28,20 @@ to your definition of valid. See the [usage](#usage).
   - [Specifying a default value for when the env variable is not required](#specifying-a-default-value-for-when-the-env-variable-is-not-required)
   - [Providing a custom parser](#providing-a-custom-parser)
 - [API](#api)
+  - [makeEnv(schema: Schema): Env](#makeenvschema-schema-env)
+  - [Parsers](#parsers)
+    - [parsers.string(value: string): string](#parsersstringvalue-string-string)
+    - [parsers.integer(value: string): number](#parsersintegervalue-string-number)
+    - [parsers.float(value: string): float](#parsersfloatvalue-string-float)
+    - [parsers.email(value: string): string](#parsersemailvalue-string-string)
+    - [parsers.url(value: string): string](#parsersurlvalue-string-string)
+    - [parsers.ipAddress(value: string): string](#parsersipaddressvalue-string-string)
+    - [parsers.port(value: string): string](#parsersportvalue-string-string)
+    - [parsers.whitelist(whitelistedValues: string[]): Parser](#parserswhitelistwhitelistedvalues-string-parser)
+    - [parsers.positiveInteger(value: string): number](#parserspositiveintegervalue-string-number)
+    - [parsers.nonPositiveInteger(value: string): number](#parsersnonpositiveintegervalue-string-number)
+    - [parsers.negativeInteger(value: string): number](#parsersnegativeintegervalue-string-number)
+    - [parsers.nonNegativeInteger(value: string): number](#parsersnonnegativeintegervalue-string-number)
 - [Recipes](#recipes)
   - [Usage with Dotenv](#usage-with-dotenv)
   - [Usage with webpack](#usage-with-webpack)
@@ -159,6 +173,94 @@ const env = makeEnv({
 ```
 
 ## API
+
+### makeEnv(schema: Schema): Env
+
+Ensures required env variables are present and returns an env object.
+
+- **Schema**:
+
+  - **\[key: string\]**: `object` - The `key` will be accessible
+    in the returning env object.
+    - **parse**: `function` - A function that takes a string and can return anything.
+      The return value will be accesible in `env[key]`.
+      If the argument is not valid, it should throw.
+    - **required**: `boolean` - Whether or not the env variable is required.
+      If the value `true` and the env variable is not set, it'll throw.
+      If the value is `false` it'll look for the env variable in `process.env`,
+      if isn't set, it'll use `defaultEnvVarValue`.
+    - **defaultEnvVarValue**: `string` - Only valid if `required: false`.
+      This is the default value of the env variable if it's not set.
+      It will be parsed by the function in `parse`.
+    - **envVarName**: `string` - The name of the env variable to look up
+      (`process.env[envVarName]`).
+
+- **Env**:
+
+  - **\[key: string\]**: `any` - The keys are the same as the ones in the schema.
+
+### Parsers
+
+#### parsers.string(value: string): string
+
+Trivial parser. It doesn't do any validation.
+
+#### parsers.integer(value: string): number
+
+Ensures the value is an integer.
+
+#### parsers.float(value: string): float
+
+Ensures the value is a float.
+
+#### parsers.email(value: string): string
+
+Ensures the value is an email.
+
+#### parsers.url(value: string): string
+
+Ensures the value is a url.
+
+#### parsers.ipAddress(value: string): string
+
+Ensures the value is an IP address.
+
+#### parsers.port(value: string): string
+
+Ensures the value is a port.
+
+#### parsers.whitelist(whitelistedValues: string[]): Parser
+
+Takes a list of valid values and returns a parser that
+ensures the value is in the whitelist.
+
+Example:
+
+```javascript
+const env = makeEnv({
+  color: {
+    parse: parsers.whitelilst(['red', 'blue', 'green']),
+    required: true,
+    envVarName: 'COLOR',
+  },
+});
+```
+
+#### parsers.positiveInteger(value: string): number
+
+Ensures the value is a positive integer.
+
+#### parsers.nonPositiveInteger(value: string): number
+
+Ensures the value is a non-positive integer.
+
+#### parsers.negativeInteger(value: string): number
+
+Ensures the value is a negative integer.
+
+#### parsers.nonNegativeInteger(value: string): number
+
+Ensures the value is a non-negative integer.
 
 ## Recipes
 
