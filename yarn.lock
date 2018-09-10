@@ -225,7 +225,7 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@semantic-release/changelog@^3.0.0":
+"@semantic-release/changelog@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@semantic-release/changelog/-/changelog-3.0.0.tgz#e01514b517e775cea47aef7df5f5685c7aff2bf2"
   dependencies:
