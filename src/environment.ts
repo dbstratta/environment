@@ -48,7 +48,10 @@ export function makeEnv<TSchema extends Schema>(schema: TSchema): Env<TSchema> {
   return env;
 }
 
-function getValue(key: string, schemaEntry: SchemaEntry): any {
+function getValue<TSchemaEntry extends SchemaEntry>(
+  key: string,
+  schemaEntry: TSchemaEntry,
+): SchemaEntryType<TSchemaEntry> {
   const serializedValue = getSerializedValue(schemaEntry);
   const value = parseSerializedValue(key, serializedValue, schemaEntry);
 
@@ -79,12 +82,12 @@ function getSerializedValue(schemaEntry: SchemaEntry): string {
   return serializedValue;
 }
 
-function parseSerializedValue(
+function parseSerializedValue<TSchemaEntry extends SchemaEntry>(
   key: string,
   serializedValue: string,
-  schemaEntry: SchemaEntry,
-): any {
-  let value: any;
+  schemaEntry: TSchemaEntry,
+): SchemaEntryType<TSchemaEntry> {
+  let value: SchemaEntryType<TSchemaEntry>;
 
   try {
     value = schemaEntry.parser(serializedValue);
