@@ -106,6 +106,21 @@ describe('makeEnv', () => {
       }),
     ).toThrow();
   });
+
+  test('throws if the parser throws', () => {
+    const envVarName = 'NOT_A_NUMBER';
+    mockProcessEnv({ [envVarName]: 'NaN' });
+
+    expect(() =>
+      makeEnv({
+        notANumber: {
+          parse: parsers.integer,
+          required: true,
+          envVarName,
+        },
+      }),
+    ).toThrow();
+  });
 });
 
 const savedProcessEnv: NodeJS.ProcessEnv = { ...process.env };

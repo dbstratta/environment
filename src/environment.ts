@@ -5,6 +5,10 @@ export type Env<TSchema extends Schema> = Readonly<
   { [key in keyof TSchema]: SchemaEntryType<TSchema[key]> }
 >;
 
+/**
+ * A schema defines the environment variable
+ * requirements.
+ */
 export type Schema = Readonly<{ [name: string]: SchemaEntry }>;
 
 export type SchemaEntry = Readonly<

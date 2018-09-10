@@ -92,7 +92,7 @@ describe('parsers.ipAddress', () => {
   test('throws when serialized value is not an IP address', () => {
     const serializedValue = 'not_an_ip_address';
 
-    expect(() => parsers.url(serializedValue)).toThrow();
+    expect(() => parsers.ipAddress(serializedValue)).toThrow();
   });
 });
 
