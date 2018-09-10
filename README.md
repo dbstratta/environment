@@ -76,12 +76,12 @@ import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   environment: {
-    parse: parsers.whitelist(['production', 'development', 'test']),
+    parser: parsers.whitelist(['production', 'development', 'test']),
     required: true,
     envVarName: 'NODE_ENV',
   },
   port: {
-    parse: parsers.port,
+    parser: parsers.port,
     required: false,
     defaultEnvVarValue: '4000',
     envVarName: 'PORT',
@@ -114,7 +114,7 @@ import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   notSet: {
-    parse: parsers.string,
+    parser: parsers.string,
     required: true,
     envVarName: 'NOT_SET',
   },
@@ -138,7 +138,7 @@ import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   port: {
-    parse: parsers.port,
+    parser: parsers.port,
     required: false,
     defaultEnvVarValue: '4000',
     envVarName: 'PORT',
@@ -159,7 +159,7 @@ import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   someValue: {
-    parse: value => {
+    parser: value => {
       if (value === 'forbiddenValue') {
         throw new Error('value is forbidden');
       }
@@ -182,7 +182,7 @@ Ensures required env variables are present and returns an env object.
 
   - **\[key: string\]**: `object` - The `key` will be accessible
     in the returning env object.
-    - **parse**: `function` - A function that takes a string and can return anything.
+    - **parser**: `function` - A function that takes a string and can return anything.
       The return value will be accesible in `env[key]`.
       If the argument is not valid, it should throw.
     - **required**: `boolean` - Whether or not the env variable is required.
@@ -191,7 +191,7 @@ Ensures required env variables are present and returns an env object.
       if isn't set, it'll use `defaultEnvVarValue`.
     - **defaultEnvVarValue**: `string` - Only valid if `required: false`.
       This is the default value of the env variable if it's not set.
-      It will be parsed by the function in `parse`.
+      It will be parsed by the function in `parser`.
     - **envVarName**: `string` - The name of the env variable to look up
       (`process.env[envVarName]`).
 
@@ -239,7 +239,7 @@ Example:
 ```javascript
 const env = makeEnv({
   color: {
-    parse: parsers.whitelilst(['red', 'blue', 'green']),
+    parser: parsers.whitelilst(['red', 'blue', 'green']),
     required: true,
     envVarName: 'COLOR',
   },
@@ -278,7 +278,7 @@ const { makeEnv, parsers } = require('@strattadb/environment');
 
 const env = makeEnv({
   secretToken: {
-    parse: parsers.string,
+    parser: parsers.string,
     required: true,
     envVarName: 'SECRET_TOKEN',
   },

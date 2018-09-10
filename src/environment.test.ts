@@ -19,13 +19,13 @@ describe('makeEnv', () => {
   test('the env object has the keys specified in the schema', () => {
     const env = makeEnv({
       testInteger: {
-        parse: parsers.integer,
+        parser: parsers.integer,
         required: false,
         defaultEnvVarValue: '100',
         envVarName: 'ENV_TEST_INTEGER',
       },
       testString: {
-        parse: parsers.string,
+        parser: parsers.string,
         required: false,
         defaultEnvVarValue: 'test',
         envVarName: 'ENV_TEST_STRING',
@@ -45,7 +45,7 @@ describe('makeEnv', () => {
     expect(() =>
       makeEnv({
         notSet: {
-          parse: parsers.string,
+          parser: parsers.string,
           required: true,
           envVarName: 'ENV_VAR_NOT_SET',
         },
@@ -61,7 +61,7 @@ describe('makeEnv', () => {
 
     const env = makeEnv({
       test: {
-        parse: parsers.integer,
+        parser: parsers.integer,
         required: true,
         envVarName,
       },
@@ -80,7 +80,7 @@ describe('makeEnv', () => {
 
     const env = makeEnv({
       test: {
-        parse: parsers.integer,
+        parser: parsers.integer,
         required: false,
         defaultEnvVarValue,
         envVarName,
@@ -98,7 +98,7 @@ describe('makeEnv', () => {
     expect(() =>
       makeEnv({
         test: {
-          parse: parsers.integer,
+          parser: parsers.integer,
           required: false,
           defaultEnvVarValue,
           envVarName: 'ENV_NOT_SET',
@@ -114,7 +114,7 @@ describe('makeEnv', () => {
     expect(() =>
       makeEnv({
         notANumber: {
-          parse: parsers.integer,
+          parser: parsers.integer,
           required: true,
           envVarName,
         },

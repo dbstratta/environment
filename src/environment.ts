@@ -13,7 +13,7 @@ export type Schema = Readonly<{ [name: string]: SchemaEntry }>;
 
 export type SchemaEntry = Readonly<
   {
-    parse: Parser;
+    parser: Parser;
     envVarName: string;
   } & SchemaEntryRequiredInfo
 >;
@@ -32,7 +32,7 @@ export type SchemaEntryRequiredInfo = Readonly<
 >;
 
 export type SchemaEntryType<TSchemaEntry extends SchemaEntry> = ReturnType<
-  TSchemaEntry['parse']
+  TSchemaEntry['parser']
 >;
 
 /**
@@ -49,31 +49,45 @@ export function makeEnv<TSchema extends Schema>(schema: TSchema): Env<TSchema> {
 }
 
 function getValue(key: string, schemaEntry: SchemaEntry): any {
+  const serializedValue = getSerializedValue(schemaEntry);
+  const value = parseSerializedValue(key, serializedValue, schemaEntry);
+
+  return value;
+}
+
+function getSerializedValue(schemaEntry: SchemaEntry): string {
   const envVarValue = process.env[schemaEntry.envVarName];
 
-  let serializedValue: string;
-
-  if (envVarValue === undefined) {
-    if (schemaEntry.required) {
-      throw new EnvironmentVariableError(
-        `${schemaEntry.envVarName} is required but is not set`,
-      );
-    }
-
-    if (typeof schemaEntry.defaultEnvVarValue !== 'string') {
-      throw new TypeError(
-        `expected defaultEnvVarValue to be of type \`string\` but received type \`${typeof schemaEntry.defaultEnvVarValue}\``,
-      );
-    }
-
-    serializedValue = schemaEntry.defaultEnvVarValue;
-  } else {
-    serializedValue = envVarValue;
+  if (envVarValue !== undefined) {
+    return envVarValue;
   }
 
+  if (schemaEntry.required) {
+    throw new EnvironmentVariableError(
+      `${schemaEntry.envVarName} is required but is not set`,
+    );
+  }
+
+  if (typeof schemaEntry.defaultEnvVarValue !== 'string') {
+    throw new TypeError(
+      `expected defaultEnvVarValue to be of type \`string\` but received type \`${typeof schemaEntry.defaultEnvVarValue}\``,
+    );
+  }
+
+  const serializedValue = schemaEntry.defaultEnvVarValue;
+
+  return serializedValue;
+}
+
+function parseSerializedValue(
+  key: string,
+  serializedValue: string,
+  schemaEntry: SchemaEntry,
+): any {
   let value: any;
+
   try {
-    value = schemaEntry.parse(serializedValue);
+    value = schemaEntry.parser(serializedValue);
   } catch (error) {
     throw new EnvironmentVariableError(
       `${key} has invalid format. Reason: ${
