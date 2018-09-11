@@ -1,7 +1,7 @@
 # environment
 
 [![Travis](https://img.shields.io/travis/com/strattadb/environment/develop.svg?style=for-the-badge)](https://travis-ci.com/strattadb/environment)
-[![npm](https://img.shields.io/npm/dm/@strattadb/environment.svg?style=for-the-badge)](https://www.npmjs.com/package/@strattadb/environment)
+[![npm](https://img.shields.io/npm/v/@strattadb/environment.svg?style=for-the-badge)](https://www.npmjs.com/package/@strattadb/environment)
 [![Codecov](https://img.shields.io/codecov/c/github/strattadb/environment/develop.svg?style=for-the-badge)](https://codecov.io/gh/strattadb/environment)
 [![David](https://img.shields.io/david/strattadb/environment.svg?style=for-the-badge)](https://david-dm.org/strattadb/environment)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
