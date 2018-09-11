@@ -28,6 +28,7 @@ to your definition of valid. See [how to use it](#usage).
   - [makeEnv(schema: Schema): Env](#makeenvschema-schema-env)
   - [Parsers](#parsers)
     - [parsers.string(value: string): string](#parsersstringvalue-string-string)
+    - [parsers.boolean(value: string): boolean](#parsersbooleanvalue-string-boolean)
     - [parsers.integer(value: string): number](#parsersintegervalue-string-number)
     - [parsers.float(value: string): float](#parsersfloatvalue-string-float)
     - [parsers.email(value: string): string](#parsersemailvalue-string-string)
@@ -136,6 +137,12 @@ Ensures required env variables are present and returns an env object.
 #### parsers.string(value: string): string
 
 Trivial parser. It doesn't do any validation.
+
+#### parsers.boolean(value: string): boolean
+
+Ensures the value is a truthy or falsy value.
+Truthy values: 'true', '1', 'yes'.
+Falsy values: 'false', '0', 'no'.
 
 #### parsers.integer(value: string): number
 

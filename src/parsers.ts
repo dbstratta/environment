@@ -8,6 +8,30 @@ export type Parser<TReturn = any> = (serializedValue: string) => TReturn;
 export const string: Parser<string> = serializedValue => serializedValue;
 
 /**
+ * Parses a boolean. parsed values are case insensitive.
+ * Truthy values: true, 1, yes.
+ * Falsy values: false, 0, no.
+ */
+export const boolean: Parser<boolean> = serializedValue => {
+  const truthyValues = ['true', '1', 'yes'];
+  const falsyValues = ['false', '0', 'no'];
+
+  const lowercaseSerializedValue = serializedValue.toLowerCase();
+
+  if (truthyValues.includes(lowercaseSerializedValue)) {
+    return true;
+  }
+
+  if (falsyValues.includes(lowercaseSerializedValue)) {
+    return false;
+  }
+
+  const validValuesString = [...truthyValues, ...falsyValues].join(' ');
+
+  throw new Error(`value is not valid. Valid values: ${validValuesString}`);
+};
+
+/**
  * Parses an integer.
  */
 export const integer: Parser<number> = serializedValue => {

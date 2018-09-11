@@ -10,6 +10,34 @@ describe('parsers.string', () => {
   });
 });
 
+describe('parsers.boolean', () => {
+  test('parses a truthy value', () => {
+    const serializedTruthyValues = ['true', '1', 'yes'];
+    const expectedValue = true;
+
+    serializedTruthyValues.forEach(serializedTruthyValue => {
+      expect(() => parsers.boolean(serializedTruthyValue)).not.toThrow();
+      expect(parsers.boolean(serializedTruthyValue)).toEqual(expectedValue);
+    });
+  });
+
+  test('parses a falsy value', () => {
+    const serializedFalsyValues = ['false', '0', 'no'];
+    const expectedValue = false;
+
+    serializedFalsyValues.forEach(serializedFalsyValue => {
+      expect(() => parsers.boolean(serializedFalsyValue)).not.toThrow();
+      expect(parsers.boolean(serializedFalsyValue)).toEqual(expectedValue);
+    });
+  });
+
+  test('throws when serialized value is not valid', () => {
+    const serializedValue = 'invalid';
+
+    expect(() => parsers.boolean(serializedValue)).toThrow();
+  });
+});
+
 describe('parsers.integer', () => {
   test('parses an integer', () => {
     const serializedValue = '10';

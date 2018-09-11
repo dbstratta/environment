@@ -1,4 +1,5 @@
 import {
+  boolean,
   email,
   float,
   integer,
@@ -16,6 +17,7 @@ import {
 
 const parsers = {
   string,
+  boolean,
   integer,
   float,
   email,
