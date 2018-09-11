@@ -1,24 +1,20 @@
 import EnvironmentVariableError from './EnvironmentVariableError';
 import { Parser } from './parsers';
 
-export type Env<TSchema extends Schema> = Readonly<
-  { [key in keyof TSchema]: SchemaEntryType<TSchema[key]> }
->;
+export type Env<T> = { [K in keyof Schema<T>]: T[K] };
 
 /**
  * A schema defines the environment variable
  * requirements.
  */
-export type Schema = Readonly<{ [name: string]: SchemaEntry }>;
+export type Schema<T> = { [K in keyof T]: SchemaEntry<T[K]> };
 
-export type SchemaEntry = Readonly<
-  {
-    parser: Parser;
-    envVarName: string;
-  } & SchemaEntryRequiredInfo
->;
+export type SchemaEntry<T> = {
+  parser: Parser<T>;
+  envVarName: string;
+} & SchemaEntryRequiredInfo;
 
-export type SchemaEntryRequiredInfo = Readonly<
+export type SchemaEntryRequiredInfo =
   | {
       required: true;
     }
@@ -28,37 +24,31 @@ export type SchemaEntryRequiredInfo = Readonly<
        * The default value of the environment variable.
        */
       defaultEnvVarValue: string;
-    }
->;
-
-export type SchemaEntryType<TSchemaEntry extends SchemaEntry> = ReturnType<
-  TSchemaEntry['parser']
->;
+    };
 
 /**
  * Returns an env object based on a schema.
  */
-export function makeEnv<TSchema extends Schema>(schema: TSchema): Env<TSchema> {
+export function makeEnv<T extends { [key: string]: any }>(
+  schema: Schema<T>,
+): Env<T> {
   const env = Object.entries(schema).reduce((acc, [key, schemaEntry]) => {
-    const value = getValue(key, schemaEntry);
+    const value = getValue(key, schemaEntry as any);
 
     return { ...acc, [key]: value };
-  }, {}) as Env<TSchema>;
+  }, {}) as Env<T>;
 
   return env;
 }
 
-function getValue<TSchemaEntry extends SchemaEntry>(
-  key: string,
-  schemaEntry: TSchemaEntry,
-): SchemaEntryType<TSchemaEntry> {
+function getValue<T>(key: string, schemaEntry: SchemaEntry<T>): T {
   const serializedValue = getSerializedValue(schemaEntry);
   const value = parseSerializedValue(key, serializedValue, schemaEntry);
 
   return value;
 }
 
-function getSerializedValue(schemaEntry: SchemaEntry): string {
+function getSerializedValue<T>(schemaEntry: SchemaEntry<T>): string {
   const envVarValue = process.env[schemaEntry.envVarName];
 
   if (envVarValue !== undefined) {
@@ -82,12 +72,12 @@ function getSerializedValue(schemaEntry: SchemaEntry): string {
   return serializedValue;
 }
 
-function parseSerializedValue<TSchemaEntry extends SchemaEntry>(
+function parseSerializedValue<T>(
   key: string,
   serializedValue: string,
-  schemaEntry: TSchemaEntry,
-): SchemaEntryType<TSchemaEntry> {
-  let value: SchemaEntryType<TSchemaEntry>;
+  schemaEntry: SchemaEntry<T>,
+): T {
+  let value: T;
 
   try {
     value = schemaEntry.parser(serializedValue);

@@ -30,7 +30,13 @@ const parsers = {
 };
 
 export { Parser, parsers };
-export { makeEnv, Env, Schema } from './environment';
+export {
+  makeEnv,
+  Env,
+  Schema,
+  SchemaEntry,
+  SchemaEntryRequiredInfo,
+} from './environment';
 export {
   default as EnvironmentVariableError,
 } from './EnvironmentVariableError';
