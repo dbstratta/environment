@@ -83,7 +83,7 @@ const env = makeEnv({
   port: {
     parser: parsers.port,
     required: false,
-    defaultEnvVarValue: '4000',
+    defaultValue: '4000',
     envVarName: 'PORT',
   },
 });
@@ -140,7 +140,7 @@ const env = makeEnv({
   port: {
     parser: parsers.port,
     required: false,
-    defaultEnvVarValue: '4000',
+    defaultValue: '4000',
     envVarName: 'PORT',
   },
 });
@@ -188,10 +188,10 @@ Ensures required env variables are present and returns an env object.
     - **required**: `boolean` - Whether or not the env variable is required.
       If the value `true` and the env variable is not set, it'll throw.
       If the value is `false` it'll look for the env variable in `process.env`,
-      if isn't set, it'll use `defaultEnvVarValue`.
-    - **defaultEnvVarValue**: `string` - Only valid if `required: false`.
+      if isn't set, it'll use `defaultValue`.
+    - **defaultValue**: `any` - Only valid if `required: false`.
       This is the default value of the env variable if it's not set.
-      It will be parsed by the function in `parser`.
+      It won't be parsed or validated.
     - **envVarName**: `string` - The name of the env variable to look up
       (`process.env[envVarName]`).
 

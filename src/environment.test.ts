@@ -21,13 +21,13 @@ describe('makeEnv', () => {
       testInteger: {
         parser: parsers.integer,
         required: false,
-        defaultEnvVarValue: '100',
+        defaultValue: 100,
         envVarName: 'ENV_TEST_INTEGER',
       },
       testString: {
         parser: parsers.string,
         required: false,
-        defaultEnvVarValue: 'test',
+        defaultValue: 'test',
         envVarName: 'ENV_TEST_STRING',
       },
     });
@@ -71,40 +71,24 @@ describe('makeEnv', () => {
     expect(env.test).toBe(expectedValue);
   });
 
-  test('falls back to defaultVarEnvValue if the env var is not set and is not required', () => {
+  test('falls back to defaultValue if the env var is not set and is not required', () => {
     const envVarName = 'ENV_TEST';
 
     mockProcessEnv({ [envVarName]: undefined });
 
-    const defaultEnvVarValue = '10';
+    const defaultValue = 10;
 
     const env = makeEnv({
       test: {
         parser: parsers.integer,
         required: false,
-        defaultEnvVarValue,
+        defaultValue,
         envVarName,
       },
     });
 
-    const expectedValue = 10;
+    const expectedValue = defaultValue;
     expect(env.test).toBe(expectedValue);
-  });
-
-  test('throws if defaultEnvVarValue is not a string', () => {
-    // @ts-ignore
-    const defaultEnvVarValue = 10 as string;
-
-    expect(() =>
-      makeEnv({
-        test: {
-          parser: parsers.integer,
-          required: false,
-          defaultEnvVarValue,
-          envVarName: 'ENV_NOT_SET',
-        },
-      }),
-    ).toThrow();
   });
 
   test('throws if the parser throws', () => {

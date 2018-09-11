@@ -12,18 +12,15 @@ export type Schema<T> = { [K in keyof T]: SchemaEntry<T[K]> };
 export type SchemaEntry<T> = {
   parser: Parser<T>;
   envVarName: string;
-} & SchemaEntryRequiredInfo;
+} & SchemaEntryRequiredInfo<T>;
 
-export type SchemaEntryRequiredInfo =
+export type SchemaEntryRequiredInfo<T> =
   | {
       required: true;
     }
   | {
       required: false;
-      /**
-       * The default value of the environment variable.
-       */
-      defaultEnvVarValue: string;
+      defaultValue: T;
     };
 
 /**
@@ -42,37 +39,24 @@ export function makeEnv<T extends { [key: string]: any }>(
 }
 
 function getValue<T>(key: string, schemaEntry: SchemaEntry<T>): T {
-  const serializedValue = getSerializedValue(schemaEntry);
-  const value = parseSerializedValue(key, serializedValue, schemaEntry);
+  const envVarValue = process.env[schemaEntry.envVarName];
+
+  if (envVarValue === undefined) {
+    if (schemaEntry.required) {
+      throw new EnvironmentVariableError(
+        `${schemaEntry.envVarName} is required but is not set`,
+      );
+    }
+
+    return schemaEntry.defaultValue;
+  }
+
+  const value = parseEnvVarValue(key, envVarValue, schemaEntry);
 
   return value;
 }
 
-function getSerializedValue<T>(schemaEntry: SchemaEntry<T>): string {
-  const envVarValue = process.env[schemaEntry.envVarName];
-
-  if (envVarValue !== undefined) {
-    return envVarValue;
-  }
-
-  if (schemaEntry.required) {
-    throw new EnvironmentVariableError(
-      `${schemaEntry.envVarName} is required but is not set`,
-    );
-  }
-
-  if (typeof schemaEntry.defaultEnvVarValue !== 'string') {
-    throw new TypeError(
-      `expected defaultEnvVarValue to be of type \`string\` but received type \`${typeof schemaEntry.defaultEnvVarValue}\``,
-    );
-  }
-
-  const serializedValue = schemaEntry.defaultEnvVarValue;
-
-  return serializedValue;
-}
-
-function parseSerializedValue<T>(
+function parseEnvVarValue<T>(
   key: string,
   serializedValue: string,
   schemaEntry: SchemaEntry<T>,
