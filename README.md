@@ -24,9 +24,6 @@ to your definition of valid. See [how to use it](#usage).
 - [Installation](#installation)
 - [Usage](#usage)
 - [Examples](#examples)
-  - [Making environment variables required](#making-environment-variables-required)
-  - [Specifying a default value for when the env variable is not required](#specifying-a-default-value-for-when-the-env-variable-is-not-required)
-  - [Providing a custom parser](#providing-a-custom-parser)
 - [API](#api)
   - [makeEnv(schema: Schema): Env](#makeenvschema-schema-env)
   - [Parsers](#parsers)
@@ -43,6 +40,9 @@ to your definition of valid. See [how to use it](#usage).
     - [parsers.negativeInteger(value: string): number](#parsersnegativeintegervalue-string-number)
     - [parsers.nonNegativeInteger(value: string): number](#parsersnonnegativeintegervalue-string-number)
 - [Recipes](#recipes)
+  - [Making environment variables required](#making-environment-variables-required)
+  - [Specifying a default value for when the env variable is not required](#specifying-a-default-value-for-when-the-env-variable-is-not-required)
+  - [Providing a custom parser](#providing-a-custom-parser)
   - [Usage with Dotenv](#usage-with-dotenv)
   - [Usage with webpack](#usage-with-webpack)
 - [FAQ](#faq)
@@ -102,75 +102,7 @@ console.log(env.port); // 4000
 
 ## Examples
 
-### Making environment variables required
-
-If `required` is `true` and the environment variable isn't set,
-it'll throw:
-
-```javascript
-// env.js
-
-import { makeEnv, parsers } from '@strattadb/environment';
-
-const env = makeEnv({
-  notSet: {
-    parser: parsers.string,
-    required: true,
-    envVarName: 'NOT_SET',
-  },
-});
-```
-
-```bash
-node env.js
-
-EnvironmentVariableError: NOT_SET is required but is not set
-    at ...
-    ...
-```
-
-### Specifying a default value for when the env variable is not required
-
-If the env variable is not required you must specify a default value:
-
-```javascript
-import { makeEnv, parsers } from '@strattadb/environment';
-
-const env = makeEnv({
-  port: {
-    parser: parsers.port,
-    required: false,
-    defaultValue: '4000',
-    envVarName: 'PORT',
-  },
-});
-
-console.log(env.port); // 4000
-```
-
-### Providing a custom parser
-
-A parser function must take a string value and can return anything.
-The value you return is what you'll get in the env object.
-If the value is not valid you should throw an error:
-
-```javascript
-import { makeEnv, parsers } from '@strattadb/environment';
-
-const env = makeEnv({
-  someValue: {
-    parser: value => {
-      if (value === 'forbiddenValue') {
-        throw new Error('value is forbidden');
-      }
-
-      return value;
-    },
-    required: true,
-    envVarName: 'SOME_VALUE',
-  },
-});
-```
+- [Simple HTTP server](examples/server)
 
 ## API
 
@@ -263,6 +195,76 @@ Ensures the value is a negative integer.
 Ensures the value is a non-negative integer.
 
 ## Recipes
+
+### Making environment variables required
+
+If `required` is `true` and the environment variable isn't set,
+it'll throw:
+
+```javascript
+// env.js
+
+import { makeEnv, parsers } from '@strattadb/environment';
+
+const env = makeEnv({
+  notSet: {
+    parser: parsers.string,
+    required: true,
+    envVarName: 'NOT_SET',
+  },
+});
+```
+
+```bash
+node env.js
+
+EnvironmentVariableError: NOT_SET is required but is not set
+    at ...
+    ...
+```
+
+### Specifying a default value for when the env variable is not required
+
+If the env variable is not required you must specify a default value:
+
+```javascript
+import { makeEnv, parsers } from '@strattadb/environment';
+
+const env = makeEnv({
+  port: {
+    parser: parsers.port,
+    required: false,
+    defaultValue: '4000',
+    envVarName: 'PORT',
+  },
+});
+
+console.log(env.port); // 4000
+```
+
+### Providing a custom parser
+
+A parser function must take a string value and can return anything.
+The value you return is what you'll get in the env object.
+If the value is not valid you should throw an error:
+
+```javascript
+import { makeEnv, parsers } from '@strattadb/environment';
+
+const env = makeEnv({
+  someValue: {
+    parser: value => {
+      if (value === 'forbiddenValue') {
+        throw new Error('value is forbidden');
+      }
+
+      return value;
+    },
+    required: true,
+    envVarName: 'SOME_VALUE',
+  },
+});
+```
 
 ### Usage with [Dotenv](https://github.com/motdotla/dotenv)
 
