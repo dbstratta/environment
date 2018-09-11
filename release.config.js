@@ -1,5 +1,5 @@
 const changelogFile = 'CHANGELOG.md';
-const changelogTitle = 'Changelog';
+const changelogTitle = '# Changelog';
 
 const gitPluginAssets = ['package.json', 'yarn.lock', changelogFile];
 
