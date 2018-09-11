@@ -141,8 +141,10 @@ Trivial parser. It doesn't do any validation.
 #### parsers.boolean(value: string): boolean
 
 Ensures the value is a truthy or falsy value.
-Truthy values: 'true', '1', 'yes'.
-Falsy values: 'false', '0', 'no'.
+
+Truthy values: `'true'`, `'1'`, `'yes'`.
+
+Falsy values: `'false'`, `'0'`, `'no'`.
 
 #### parsers.integer(value: string): number
 
