@@ -11,7 +11,7 @@ Environment variable configuration for Node.js made easy.
 ## The problem
 
 Every application needs to ensure that some environment variables are
-set from the beginning, and checking if the value in `process.env` is undefined
+set from the beginning, and checking if the value in `process.env` is `undefined`
 every time is needed gets tedious very fast.
 
 `environment` allows applications to ensure required env variables are set and are valid according
@@ -35,7 +35,7 @@ to your definition of valid. See [how to use it](#usage).
     - [parsers.url(value: string): string](#parsersurlvalue-string-string)
     - [parsers.ipAddress(value: string): string](#parsersipaddressvalue-string-string)
     - [parsers.port(value: string): string](#parsersportvalue-string-string)
-    - [parsers.whitelist(whitelistedValues: string[]): Parser](#parserswhitelistwhitelistedvalues-string-parser)
+    - [parsers.whitelist(whitelistedValues: string[]): Parser\<string\>](#parserswhitelistwhitelistedvalues-string-parserstring)
     - [parsers.positiveInteger(value: string): number](#parserspositiveintegervalue-string-number)
     - [parsers.nonPositiveInteger(value: string): number](#parsersnonpositiveintegervalue-string-number)
     - [parsers.negativeInteger(value: string): number](#parsersnegativeintegervalue-string-number)
@@ -56,7 +56,7 @@ to your definition of valid. See [how to use it](#usage).
 
 ## Installation
 
-With Yarn:
+With [Yarn](https://yarnpkg.com/):
 
 ```bash
 yarn add @strattadb/environment
@@ -170,7 +170,7 @@ Ensures the value is an IP address.
 
 Ensures the value is a port.
 
-#### parsers.whitelist(whitelistedValues: string[]): Parser
+#### parsers.whitelist(whitelistedValues: string[]): Parser\<string\>
 
 Takes a list of valid values and returns a parser that
 ensures the value is in the whitelist.
@@ -178,6 +178,8 @@ ensures the value is in the whitelist.
 Example:
 
 ```javascript
+import { makeEnv, parsers } from '@strattadb/environment';
+
 const env = makeEnv({
   color: {
     parser: parsers.whitelilst(['red', 'blue', 'green']),
@@ -313,7 +315,7 @@ not be guaranteed to have your required env variables.
 
 No, when you create an env object it will read the value of
 `process.env` at that time. After that, if anything makes
-changes to `process.env` it will not be reflected in the
+changes to `process.env`, it will not be reflected in the
 env object.
 
 ## Node.js support
