@@ -54,7 +54,7 @@
     "@commitlint/travis-cli": "7.1.2",
     "@semantic-release/changelog": "3.0.0",
     "@semantic-release/git": "7.0.4",
-    "@types/jest": "23.3.2",
+    "@types/jest": "23.3.3",
     "@types/node": "10.11.3",
     "@types/validator": "9.4.2",
     "codecov": "3.1.0",
