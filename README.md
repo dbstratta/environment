@@ -354,6 +354,7 @@ Node.js version 8 or higher.
 ## Related libraries
 
 - [Convict](https://github.com/mozilla/node-convict)
+- [Envalid](https://github.com/af/envalid)
 - [Dotenv](https://github.com/motdotla/dotenv)
 
 ## License
