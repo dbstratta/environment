@@ -365,6 +365,7 @@ Node.js version 8 or higher.
 
 - [Convict](https://github.com/mozilla/node-convict)
 - [Envalid](https://github.com/af/envalid)
+- [require-environment-variables](https://github.com/bjoshuanoah/require-environment-variables)
 - [Dotenv](https://github.com/motdotla/dotenv)
 
 ## License

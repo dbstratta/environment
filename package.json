@@ -32,6 +32,8 @@
     "env",
     "var",
     "config",
+    "required",
+    "validate",
     "configuration",
     "process.env"
   ],
