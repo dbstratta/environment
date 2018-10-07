@@ -50,6 +50,7 @@ to your definition of valid. See [how to use it](#usage).
 - [FAQ](#faq)
   - [Where should I call `makeEnv` in my application?](#where-should-i-call-makeenv-in-my-application)
   - [Does it support changing env variables dynamically?](#does-it-support-changing-env-variables-dynamically)
+  - [Can I have more than one env object per application?](#can-i-have-more-than-one-env-object-per-application)
 - [Node.js support](#nodejs-support)
 - [Maintainers](#maintainers)
 - [Related libraries](#related-libraries)
@@ -342,6 +343,10 @@ No, when you create an env object it will read the value of
 `process.env` at that time. After that, if anything makes
 changes to `process.env`, it will not be reflected in the
 env object.
+
+### Can I have more than one env object per application?
+
+Yes! You can have as many env objects as you want!
 
 ## Node.js support
 
