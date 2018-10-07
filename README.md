@@ -52,6 +52,7 @@ to your definition of valid. See [how to use it](#usage).
   - [Does it support changing env variables dynamically?](#does-it-support-changing-env-variables-dynamically)
 - [Node.js support](#nodejs-support)
 - [Maintainers](#maintainers)
+- [Who's using environment](#whos-using-environment)
 - [Related libraries](#related-libraries)
 - [License](#license)
 
@@ -350,6 +351,10 @@ Node.js version 8 or higher.
 ## Maintainers
 
 - [Diego Stratta](https://github.com/strattadb)
+
+## Who's using environment
+
+- [loop](https://github.com/strattadb/loop)
 
 ## Related libraries
 
