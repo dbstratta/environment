@@ -127,7 +127,7 @@ describe('parsers.ipAddress', () => {
 describe('parsers.port', () => {
   test('parses a port', () => {
     const serializedValue = '4000';
-    const expectedValue = serializedValue;
+    const expectedValue = 4000;
 
     expect(() => parsers.port(serializedValue)).not.toThrow();
     expect(parsers.port(serializedValue)).toEqual(expectedValue);

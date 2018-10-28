@@ -99,12 +99,12 @@ export const ipAddress: Parser<string> = serializedValue => {
 /**
  * Parses a port number.
  */
-export const port: Parser<string> = serializedValue => {
-  const value = serializedValue;
-
-  if (!isPort(value)) {
+export const port: Parser<number> = serializedValue => {
+  if (!isPort(serializedValue)) {
     throw new Error('value is not a port');
   }
+
+  const value = Number.parseInt(serializedValue, 10);
 
   return value;
 };
@@ -120,7 +120,13 @@ export function whitelist(
     const value = serializedValue;
 
     if (!whitelistedValues.includes(value)) {
-      throw new Error('value is not whitelisted');
+      const whitelistedValuesStr = whitelistedValues
+        .map(whitelistedValue => `'${whitelistedValue}'`)
+        .join(', ');
+
+      throw new Error(
+        `value is not whitelisted. Valid values are ${whitelistedValuesStr}`,
+      );
     }
 
     return value;
