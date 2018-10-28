@@ -5,7 +5,6 @@ describe('parsers.string', () => {
     const serializedValue = 'test';
     const expectedValue = serializedValue;
 
-    expect(() => parsers.string(serializedValue)).not.toThrow();
     expect(parsers.string(serializedValue)).toEqual(expectedValue);
   });
 });
@@ -16,7 +15,6 @@ describe('parsers.boolean', () => {
     const expectedValue = true;
 
     serializedTruthyValues.forEach(serializedTruthyValue => {
-      expect(() => parsers.boolean(serializedTruthyValue)).not.toThrow();
       expect(parsers.boolean(serializedTruthyValue)).toEqual(expectedValue);
     });
   });
@@ -26,7 +24,6 @@ describe('parsers.boolean', () => {
     const expectedValue = false;
 
     serializedFalsyValues.forEach(serializedFalsyValue => {
-      expect(() => parsers.boolean(serializedFalsyValue)).not.toThrow();
       expect(parsers.boolean(serializedFalsyValue)).toEqual(expectedValue);
     });
   });
@@ -43,7 +40,6 @@ describe('parsers.integer', () => {
     const serializedValue = '10';
     const expectedValue = 10;
 
-    expect(() => parsers.integer(serializedValue)).not.toThrow();
     expect(parsers.integer(serializedValue)).toEqual(expectedValue);
   });
 
@@ -65,7 +61,6 @@ describe('parsers.float', () => {
     const serializedValue = '10.2';
     const expectedValue = 10.2;
 
-    expect(() => parsers.float(serializedValue)).not.toThrow();
     expect(parsers.float(serializedValue)).toEqual(expectedValue);
   });
 
@@ -81,7 +76,6 @@ describe('parsers.email', () => {
     const serializedValue = 'example@example.com';
     const expectedValue = serializedValue;
 
-    expect(() => parsers.email(serializedValue)).not.toThrow();
     expect(parsers.email(serializedValue)).toEqual(expectedValue);
   });
 
@@ -97,7 +91,6 @@ describe('parsers.url', () => {
     const serializedValue = 'https://example.com';
     const expectedValue = serializedValue;
 
-    expect(() => parsers.url(serializedValue)).not.toThrow();
     expect(parsers.url(serializedValue)).toEqual(expectedValue);
   });
 
@@ -113,7 +106,6 @@ describe('parsers.ipAddress', () => {
     const serializedValue = '0.0.0.0';
     const expectedValue = serializedValue;
 
-    expect(() => parsers.ipAddress(serializedValue)).not.toThrow();
     expect(parsers.ipAddress(serializedValue)).toEqual(expectedValue);
   });
 
@@ -129,7 +121,6 @@ describe('parsers.port', () => {
     const serializedValue = '4000';
     const expectedValue = 4000;
 
-    expect(() => parsers.port(serializedValue)).not.toThrow();
     expect(parsers.port(serializedValue)).toEqual(expectedValue);
   });
 
@@ -148,7 +139,6 @@ describe('parsers.whitelist', () => {
 
     const parser = parsers.whitelist(whitelistedValues);
 
-    expect(() => parser(serializedValue)).not.toThrow();
     expect(parser(serializedValue)).toEqual(expectedValue);
   });
 
@@ -162,12 +152,34 @@ describe('parsers.whitelist', () => {
   });
 });
 
+describe('parsers.regex', () => {
+  test('parses a value matching the pattern', () => {
+    const serializedValue = 'validValue12';
+    const expectedValue = serializedValue;
+
+    const pattern = /^valid.*\d+$/;
+
+    const parser = parsers.regex(pattern);
+
+    expect(parser(serializedValue)).toEqual(expectedValue);
+  });
+
+  test("throws when serialized value doesn't match the pattern", () => {
+    const serializedValue = 'invalidValue_1';
+
+    const pattern = /^valid.*\d+$/;
+
+    const parser = parsers.regex(pattern);
+
+    expect(() => parser(serializedValue)).toThrow();
+  });
+});
+
 describe('parsers.positiveInteger', () => {
   test('parses a positive integer', () => {
     const serializedValue = '2';
     const expectedValue = 2;
 
-    expect(() => parsers.positiveInteger(serializedValue)).not.toThrow();
     expect(parsers.positiveInteger(serializedValue)).toEqual(expectedValue);
   });
 
@@ -189,7 +201,6 @@ describe('parsers.nonPositiveInteger', () => {
     const serializedValue = '-10';
     const expectedValue = -10;
 
-    expect(() => parsers.nonPositiveInteger(serializedValue)).not.toThrow();
     expect(parsers.nonPositiveInteger(serializedValue)).toEqual(expectedValue);
   });
 
@@ -211,7 +222,6 @@ describe('parsers.negativeInteger', () => {
     const serializedValue = '-10';
     const expectedValue = -10;
 
-    expect(() => parsers.negativeInteger(serializedValue)).not.toThrow();
     expect(parsers.negativeInteger(serializedValue)).toEqual(expectedValue);
   });
 
@@ -233,7 +243,6 @@ describe('parsers.nonNegativeInteger', () => {
     const serializedValue = '0';
     const expectedValue = 0;
 
-    expect(() => parsers.nonNegativeInteger(serializedValue)).not.toThrow();
     expect(parsers.nonNegativeInteger(serializedValue)).toEqual(expectedValue);
   });
 

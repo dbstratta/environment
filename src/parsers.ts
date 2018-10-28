@@ -136,6 +136,23 @@ export function whitelist(
 }
 
 /**
+ * Returns a parser that parses a value matching a regular expression.
+ */
+export function regex(pattern: RegExp): Parser<string> {
+  const whitelistParser: Parser<string> = serializedValue => {
+    const value = serializedValue;
+
+    if (!pattern.test(value)) {
+      throw new Error(`value does not match regex ${pattern.toString()}`);
+    }
+
+    return value;
+  };
+
+  return whitelistParser;
+}
+
+/**
  * Parses a positive integer.
  */
 export const positiveInteger: Parser<number> = serializedValue => {

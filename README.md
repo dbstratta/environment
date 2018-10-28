@@ -34,7 +34,7 @@ to your definition of valid. See [how to use it](#usage).
     - [parsers.email(value: string): string](#parsersemailvalue-string-string)
     - [parsers.url(value: string): string](#parsersurlvalue-string-string)
     - [parsers.ipAddress(value: string): string](#parsersipaddressvalue-string-string)
-    - [parsers.port(value: string): string](#parsersportvalue-string-string)
+    - [parsers.port(value: string): number](#parsersportvalue-string-number)
     - [parsers.whitelist(whitelistedValues: string[]): Parser\<string\>](#parserswhitelistwhitelistedvalues-string-parserstring)
     - [parsers.positiveInteger(value: string): number](#parserspositiveintegervalue-string-number)
     - [parsers.nonPositiveInteger(value: string): number](#parsersnonpositiveintegervalue-string-number)
@@ -87,7 +87,7 @@ const env = makeEnv({
   port: {
     parser: parsers.port,
     required: false,
-    defaultValue: '4000',
+    defaultValue: 4000,
     envVarName: 'PORT',
   },
 });
@@ -169,7 +169,7 @@ Ensures the value is a url.
 
 Ensures the value is an IP address.
 
-#### parsers.port(value: string): string
+#### parsers.port(value: string): number
 
 Ensures the value is a port.
 
@@ -248,7 +248,7 @@ const env = makeEnv({
   port: {
     parser: parsers.port,
     required: false,
-    defaultValue: '4000',
+    defaultValue: 4000,
     envVarName: 'PORT',
   },
 });
