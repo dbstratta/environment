@@ -1388,9 +1388,9 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
 
-danger@4.4.10:
-  version "4.4.10"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-4.4.10.tgz#dc6bb25b2bd5e00bc0a42f107d944914db9d650e"
+danger@6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-6.0.2.tgz#760f7603bf8bdd1c451236cd29c790baa4cf8185"
   dependencies:
     "@babel/polyfill" "^7.0.0"
     "@octokit/rest" "^15.12.1"
@@ -1411,6 +1411,7 @@ danger@4.4.10:
     memfs-or-file-map-to-github-branch "^1.1.0"
     node-cleanup "^2.1.2"
     node-fetch "^2.2.0"
+    override-require "^1.1.1"
     p-limit "^2.0.0"
     parse-diff "^0.5.1"
     parse-git-config "^2.0.3"
@@ -4701,6 +4702,10 @@ osenv@0, osenv@^0.1.4, osenv@^0.1.5:
   dependencies:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
+
+override-require@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/override-require/-/override-require-1.1.1.tgz#6ae22fadeb1f850ffb0cf4c20ff7b87e5eb650df"
 
 p-defer@^1.0.0:
   version "1.0.0"
