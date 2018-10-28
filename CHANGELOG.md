@@ -1,3 +1,18 @@
+# Changelog
+
+# [5.0.0](https://github.com/strattadb/environment.git/compare/v4.1.0...v5.0.0) (2018-10-28)
+
+
+### Features
+
+* add regex parser ([4858de9](https://github.com/strattadb/environment.git/commit/4858de9))
+* return a number in port parser ([55d1524](https://github.com/strattadb/environment.git/commit/55d1524))
+
+
+### BREAKING CHANGES
+
+* port parser now returns a number instead of a string.
+
 Changelog
 
 # [4.1.0](https://github.com/strattadb/environment/compare/v4.0.0...v4.1.0) (2018-09-11)
