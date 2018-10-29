@@ -1,5 +1,12 @@
 # Changelog
 
+# [5.1.0](https://github.com/strattadb/environment.git/compare/v5.0.0...v5.1.0) (2018-10-29)
+
+
+### Features
+
+* improve type definition for whitelist parser ([2975adf](https://github.com/strattadb/environment.git/commit/2975adf))
+
 # [5.0.0](https://github.com/strattadb/environment.git/compare/v4.1.0...v5.0.0) (2018-10-28)
 
 
