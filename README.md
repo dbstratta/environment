@@ -36,6 +36,7 @@ to your definition of valid. See [how to use it](#usage).
     - [parsers.ipAddress(value: string): string](#parsersipaddressvalue-string-string)
     - [parsers.port(value: string): number](#parsersportvalue-string-number)
     - [parsers.whitelist(whitelistedValues: string[]): Parser\<string\>](#parserswhitelistwhitelistedvalues-string-parserstring)
+    - [parsers.regex(pattern: Regex): Parser\<string\>](#parsersregexpattern-regex-parserstring)
     - [parsers.positiveInteger(value: string): number](#parserspositiveintegervalue-string-number)
     - [parsers.nonPositiveInteger(value: string): number](#parsersnonpositiveintegervalue-string-number)
     - [parsers.negativeInteger(value: string): number](#parsersnegativeintegervalue-string-number)
@@ -186,6 +187,25 @@ import { makeEnv, parsers } from '@strattadb/environment';
 const env = makeEnv({
   color: {
     parser: parsers.whitelilst(['red', 'blue', 'green']),
+    required: true,
+    envVarName: 'COLOR',
+  },
+});
+```
+
+#### parsers.regex(pattern: Regex): Parser\<string\>
+
+Takes a regex and returns a parser that
+ensures the value matches the pattern.
+
+Example:
+
+```javascript
+import { makeEnv, parsers } from '@strattadb/environment';
+
+const env = makeEnv({
+  color: {
+    parser: parsers.regex(/^green$/),
     required: true,
     envVarName: 'COLOR',
   },
