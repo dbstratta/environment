@@ -113,23 +113,23 @@ export const port: Parser<number> = serializedValue => {
  * Returns a parser that parses a value from
  * a list of whitelisted values.
  */
-export function whitelist(
-  whitelistedValues: ReadonlyArray<string>,
-): Parser<string> {
-  const whitelistParser: Parser<string> = serializedValue => {
+export function whitelist<TValue extends string>(
+  whitelistedValues: ReadonlyArray<TValue>,
+): Parser<TValue> {
+  const whitelistParser: Parser<TValue> = serializedValue => {
     const value = serializedValue;
 
-    if (!whitelistedValues.includes(value)) {
+    if (!(whitelistedValues as ReadonlyArray<string>).includes(value)) {
       const whitelistedValuesStr = whitelistedValues
         .map(whitelistedValue => `'${whitelistedValue}'`)
         .join(', ');
 
       throw new Error(
-        `value is not whitelisted. Valid values are ${whitelistedValuesStr}`,
+        `value is not in the whitelist. Valid values are ${whitelistedValuesStr}`,
       );
     }
 
-    return value;
+    return value as TValue;
   };
 
   return whitelistParser;
