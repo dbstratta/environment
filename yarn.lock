@@ -346,9 +346,9 @@
   version "23.3.9"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.9.tgz#c16b55186ee73ae65e001fbee69d392c51337ad1"
 
-"@types/node@10.12.4":
-  version "10.12.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.4.tgz#292a86dcfffac3a9f8073f6e29b71c05bbc65c0d"
+"@types/node@10.12.5":
+  version "10.12.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.5.tgz#7e7ea1a9b34d2c8d704cb0b755dffbcda34741ad"
 
 "@types/validator@9.4.2":
   version "9.4.2"
