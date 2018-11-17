@@ -63,7 +63,7 @@
     "danger": "6.1.4",
     "husky": "1.1.4",
     "jest": "23.6.0",
-    "lint-staged": "8.0.4",
+    "lint-staged": "8.0.5",
     "prettier": "1.15.2",
     "rimraf": "2.6.2",
     "semantic-release": "15.12.0",
