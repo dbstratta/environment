@@ -60,7 +60,7 @@
     "@types/node": "10.12.9",
     "@types/validator": "9.4.3",
     "codecov": "3.1.0",
-    "danger": "6.1.4",
+    "danger": "6.1.5",
     "husky": "1.1.4",
     "jest": "23.6.0",
     "lint-staged": "8.0.5",
