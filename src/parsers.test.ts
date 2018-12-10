@@ -175,6 +175,41 @@ describe('parsers.regex', () => {
   });
 });
 
+describe('parsers.array', () => {
+  test('parses an array of values', () => {
+    const values = ['test1', 'test2', 'test3'];
+
+    const serializedValue = values.join(',');
+    const expectedValue = values;
+
+    const parser = parsers.array({ parser: parsers.string });
+
+    expect(parser(serializedValue)).toEqual(expectedValue);
+  });
+
+  test('parses an array of values with custom separator', () => {
+    const separator = ':';
+    const values = ['test1', 'test2', 'test3'];
+
+    const serializedValue = values.join(separator);
+    const expectedValue = values;
+
+    const parser = parsers.array({ parser: parsers.string, separator });
+
+    expect(parser(serializedValue)).toEqual(expectedValue);
+  });
+
+  test("throws when the value parser can't parse a value", () => {
+    const values = ['test1', 'test2', 'test3'];
+
+    const serializedValue = values.join(',');
+
+    const parser = parsers.array({ parser: parsers.integer });
+
+    expect(() => parser(serializedValue)).toThrow();
+  });
+});
+
 describe('parsers.positiveInteger', () => {
   test('parses a positive integer', () => {
     const serializedValue = '2';

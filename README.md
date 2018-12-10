@@ -37,6 +37,7 @@ to your definition of valid. See [how to use it](#usage).
     - [parsers.port(value: string): number](#parsersportvalue-string-number)
     - [parsers.whitelist(whitelistedValues: string[]): Parser\<string\>](#parserswhitelistwhitelistedvalues-string-parserstring)
     - [parsers.regex(pattern: Regex): Parser\<string\>](#parsersregexpattern-regex-parserstring)
+    - [parsers.array\<T\>({ parser: Parser\<T\>, separator?: string }): Parser\<T\>](#parsersarrayt-parser-parsert-separator-string--parsert)
     - [parsers.positiveInteger(value: string): number](#parserspositiveintegervalue-string-number)
     - [parsers.nonPositiveInteger(value: string): number](#parsersnonpositiveintegervalue-string-number)
     - [parsers.negativeInteger(value: string): number](#parsersnegativeintegervalue-string-number)
@@ -209,6 +210,25 @@ const env = makeEnv({
     parser: parsers.regex(/^green$/),
     required: true,
     envVarName: 'COLOR',
+  },
+});
+```
+
+#### parsers.array\<T\>({ parser: Parser\<T\>, separator?: string }): Parser\<T\>
+
+Takes a parser and returns a parser that parses a list of values.
+The default value separator is ','.
+
+Example:
+
+```javascript
+import { makeEnv, parsers } from '@strattadb/environment';
+
+const env = makeEnv({
+  color: {
+    parser: parsers.array({ parser: parsers.integer }),
+    required: true,
+    envVarName: 'FAVORITE_NUMBERS',
   },
 });
 ```

@@ -152,6 +152,32 @@ export function regex(pattern: RegExp): Parser<string> {
   return whitelistParser;
 }
 
+export type ArrayParserArgs<TType> = Readonly<{
+  parser: Parser<TType>;
+  separator?: string;
+}>;
+
+const defaultArraySeparator = ',';
+
+/**
+ * Returns a parser that parses a list of values of a type.
+ */
+export function array<TType>(
+  args: ArrayParserArgs<TType>,
+): Parser<ReadonlyArray<TType>> {
+  const separator = args.separator || defaultArraySeparator;
+
+  const arrayParser: Parser<ReadonlyArray<TType>> = serializedArray => {
+    const serializedValues = serializedArray.split(separator);
+
+    const values = serializedValues.map(args.parser);
+
+    return values;
+  };
+
+  return arrayParser;
+}
+
 /**
  * Parses a positive integer.
  */
