@@ -126,11 +126,12 @@ Ensures required env variables are present and returns an env object.
       If the value `true` and the env variable is not set, it'll throw.
       If the value is `false` it'll look for the env variable in `process.env`,
       if isn't set, it'll use `defaultValue`.
-    - **defaultValue**: `any` - Only valid if `required: false`.
+    - **defaultValue**: `any?` - Only valid if `required: false`.
       This is the default value of the env variable if it's not set.
       It won't be parsed or validated.
     - **envVarName**: `string` - The name of the env variable to look up
       (`process.env[envVarName]`).
+    - **description**: `string?` - Helper text describing the variable.
 
 - **Env**:
 

@@ -11,7 +11,14 @@ export type Schema<T> = { [K in keyof T]: SchemaEntry<T[K]> };
 
 export type SchemaEntry<T> = {
   parser: Parser<T>;
+  /**
+   * The name of the environment variable variable to look up.
+   */
   envVarName: string;
+  /**
+   * Helper text describing the variable.
+   */
+  description?: string;
 } & SchemaEntryRequiredInfo<T>;
 
 export type SchemaEntryRequiredInfo<T> =
@@ -20,6 +27,10 @@ export type SchemaEntryRequiredInfo<T> =
     }
   | {
       required: false;
+      /**
+       * The default value to be used if the env variable is not defined.
+       * It will not be parsed or validated.
+       */
       defaultValue: T;
     };
 
@@ -43,9 +54,13 @@ function getValue<T>(key: string, schemaEntry: SchemaEntry<T>): T {
 
   if (envVarValue === undefined) {
     if (schemaEntry.required) {
-      throw new EnvironmentVariableError(
-        `${schemaEntry.envVarName} is required but is not set`,
-      );
+      let message = `${schemaEntry.envVarName} is required but is not set`;
+
+      if (schemaEntry.description) {
+        message += `. Variable description: ${schemaEntry.description}`;
+      }
+
+      throw new EnvironmentVariableError(message);
     }
 
     return schemaEntry.defaultValue;
