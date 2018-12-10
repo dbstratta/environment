@@ -8,7 +8,7 @@ stages:
 
 node_js_defaults: &node_js_defaults
   language: node_js
-  node_js: '10'
+  node_js: '11'
   cache:
     yarn: true
     directories:
@@ -23,6 +23,7 @@ jobs:
     - stage: test
       <<: *node_js_defaults
       node_js:
+        - '11'
         - '10'
         - '9'
         - '8'

@@ -47,8 +47,6 @@ to your definition of valid. See [how to use it](#usage).
   - [Specifying a default value for when the env variable is not required](#specifying-a-default-value-for-when-the-env-variable-is-not-required)
   - [Providing a custom parser](#providing-a-custom-parser)
   - [Usage with Dotenv](#usage-with-dotenv)
-  - [Usage with webpack](#usage-with-webpack)
-    - [Manually](#manually)
 - [FAQ](#faq)
   - [Where should I call `makeEnv` in my application?](#where-should-i-call-makeenv-in-my-application)
   - [Does it support changing env variables dynamically?](#does-it-support-changing-env-variables-dynamically)
@@ -341,34 +339,6 @@ const env = makeEnv({
   },
 });
 ```
-
-### Usage with [webpack](https://github.com/webpack/webpack)
-
-#### Manually
-
-Use `DefinePlugin` in your webpack configuration like this:
-
-```javascript
-const webpackConfig = {
-  // ...
-
-  plugins: [
-    new DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        ENABLE_FEATURE_A: JSON.stringify(process.env.ENABLE_FEATURE_A),
-      },
-    }),
-  ],
-
-  // ...
-};
-```
-
-Remember that you have to define the `'process.env'` object,
-it doesn't work if you define keys directly like
-`'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)`. This is because `environment`
-looks up keys dynamically, and webpack can't know their names at compile time.
 
 ## FAQ
 
