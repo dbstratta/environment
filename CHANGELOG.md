@@ -1,5 +1,13 @@
 # Changelog
 
+# [5.2.0](https://github.com/strattadb/environment.git/compare/v5.1.0...v5.2.0) (2018-12-10)
+
+
+### Features
+
+* add array parser ([fba9591](https://github.com/strattadb/environment.git/commit/fba9591))
+* add description field ([71393d5](https://github.com/strattadb/environment.git/commit/71393d5))
+
 # [5.1.0](https://github.com/strattadb/environment.git/compare/v5.0.0...v5.1.0) (2018-10-29)
 
 
