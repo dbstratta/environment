@@ -362,7 +362,7 @@ Yes! You can have as many env objects as you want!
 
 ## Node.js support
 
-Node.js version 8 or higher.
+Node.js version 10 or higher.
 
 ## Maintainers
 
