@@ -65,7 +65,7 @@
     "jest": "23.6.0",
     "lint-staged": "8.1.0",
     "prettier": "1.15.3",
-    "rimraf": "2.6.2",
+    "rimraf": "2.6.3",
     "semantic-release": "15.13.2",
     "ts-jest": "23.10.5",
     "tslint": "5.12.0",
