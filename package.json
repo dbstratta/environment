@@ -66,7 +66,7 @@
     "lint-staged": "8.1.0",
     "prettier": "1.15.3",
     "rimraf": "2.6.3",
-    "semantic-release": "15.13.2",
+    "semantic-release": "15.13.3",
     "ts-jest": "23.10.5",
     "tslint": "5.12.1",
     "tslint-config-airbnb": "5.11.1",
