@@ -55,7 +55,7 @@
     "@commitlint/prompt-cli": "7.3.1",
     "@commitlint/travis-cli": "7.3.1",
     "@semantic-release/changelog": "3.0.2",
-    "@semantic-release/git": "7.0.7",
+    "@semantic-release/git": "7.0.8",
     "@types/jest": "23.3.12",
     "@types/node": "10.12.18",
     "@types/validator": "10.9.0",
