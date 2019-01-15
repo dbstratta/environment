@@ -50,10 +50,10 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@commitlint/cli": "7.3.1",
+    "@commitlint/cli": "7.3.2",
     "@commitlint/config-conventional": "7.3.1",
     "@commitlint/prompt-cli": "7.3.1",
-    "@commitlint/travis-cli": "7.3.1",
+    "@commitlint/travis-cli": "7.3.2",
     "@semantic-release/changelog": "3.0.2",
     "@semantic-release/git": "7.0.8",
     "@types/jest": "23.3.12",
