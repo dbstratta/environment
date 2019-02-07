@@ -2308,10 +2308,10 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
-danger@7.0.7:
-  version "7.0.7"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-7.0.7.tgz#03f08fc78fd1125cc87b855383fc8c5069bfe1ab"
-  integrity sha512-x91m7V9bWc7cCaYxtnsG6nZTtKanvepK6VUvzym9vE7M4lY+C4fvRfg0D9ODFN7H6RuHK2NmTxDPTBsZpUU0og==
+danger@7.0.8:
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-7.0.8.tgz#5b93799b6bd1b2e9b600691583f0c71ed0ecf24b"
+  integrity sha512-2JVs5ThvDwkO+I0cbu8HyFA59wmRGUl/HIiGJZN/wsk6sURX0EScHbbxnuskSn6f8ZFm3Rkft1eupNqX4pS7rQ==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.14.1"
@@ -2344,7 +2344,6 @@ danger@7.0.7:
     require-from-string "^2.0.2"
     rfc6902 "^3.0.1"
     supports-hyperlinks "^1.0.1"
-    vm2 "^3.6.3"
 
 dargs@^4.0.1:
   version "4.1.0"
@@ -8771,11 +8770,6 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
-
-vm2@^3.6.3:
-  version "3.6.10"
-  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.6.10.tgz#a9066c3849ad8a3ea35b9c0cf79a6589ce6e3cbe"
-  integrity sha512-p4LBl7theIhmKaWPdCn25kEIG0bfDDEDx1lexXH7gcCu9pHIT+PKFgofwLHVHUGhe39lKExeaYVEZtdbQhdl2g==
 
 vorpal@^1.12.0:
   version "1.12.0"
