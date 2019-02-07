@@ -1,5 +1,22 @@
 # Changelog
 
+# [6.0.0](https://github.com/strattadb/environment/compare/v5.2.0...v6.0.0) (2019-02-07)
+
+
+### chore
+
+* drop Node.js < 10 support ([c2475ca](https://github.com/strattadb/environment/commit/c2475ca))
+
+
+### Features
+
+* add `on` and `off` as truthy and falsy values respectively ([7e8b423](https://github.com/strattadb/environment/commit/7e8b423))
+
+
+### BREAKING CHANGES
+
+* drop Node.js < 10 support
+
 # [5.2.0](https://github.com/strattadb/environment.git/compare/v5.1.0...v5.2.0) (2018-12-10)
 
 
