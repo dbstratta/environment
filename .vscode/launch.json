@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test all",
+      "protocol": "inspector",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["test:debug"],
+      "port": 9229,
+      "smartStep": true,
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test current file",
+      "protocol": "inspector",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["test:debug", "${relativeFile}"],
+      "port": 9229,
+      "smartStep": true,
+      "sourceMaps": true
+    }
+  ]
+}
