@@ -18,7 +18,7 @@ jobs:
   include:
     - stage: lint
       <<: *node_js_defaults
-      script: yarn lint:ci
+      script: yarn lint:check
 
     - stage: test
       <<: *node_js_defaults

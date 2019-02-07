@@ -6,8 +6,10 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
   moduleFileExtensions: ['js', 'ts', 'json'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts$',
-  modulePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/e2e'],
+  modulePathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
+  watchPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': 'babel-jest',
   },
+  errorOnDeprecated: true,
 };

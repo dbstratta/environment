@@ -1,5 +1,7 @@
 import { isEmail, isInt, isIP, isPort, isURL } from 'validator';
 
+import EnvironmentVariableError from './EnvironmentVariableError';
+
 export type Parser<TReturn = any> = (serializedValue: string) => TReturn;
 
 /**
@@ -28,7 +30,9 @@ export const boolean: Parser<boolean> = serializedValue => {
 
   const validValuesString = [...truthyValues, ...falsyValues].join(' ');
 
-  throw new Error(`value is not valid. Valid values: ${validValuesString}`);
+  throw new EnvironmentVariableError(
+    `value is not valid. Valid values: ${validValuesString}`,
+  );
 };
 
 /**
@@ -36,7 +40,7 @@ export const boolean: Parser<boolean> = serializedValue => {
  */
 export const integer: Parser<number> = serializedValue => {
   if (!isInt(serializedValue)) {
-    throw new Error('value is not an integer');
+    throw new EnvironmentVariableError('value is not an integer');
   }
 
   const value = Number.parseInt(serializedValue, 10);
@@ -51,7 +55,7 @@ export const float: Parser<number> = serializedValue => {
   const value = Number.parseFloat(serializedValue);
 
   if (Number.isNaN(value)) {
-    throw new Error('value is not a number');
+    throw new EnvironmentVariableError('value is not a number');
   }
 
   return value;
@@ -64,7 +68,7 @@ export const email: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isEmail(value)) {
-    throw new Error('value is not an email');
+    throw new EnvironmentVariableError('value is not an email');
   }
 
   return value;
@@ -77,7 +81,7 @@ export const url: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isURL(value)) {
-    throw new Error('value is not an URL');
+    throw new EnvironmentVariableError('value is not an URL');
   }
 
   return value;
@@ -90,7 +94,7 @@ export const ipAddress: Parser<string> = serializedValue => {
   const value = serializedValue;
 
   if (!isIP(value)) {
-    throw new Error('value is not an IP address');
+    throw new EnvironmentVariableError('value is not an IP address');
   }
 
   return value;
@@ -101,7 +105,7 @@ export const ipAddress: Parser<string> = serializedValue => {
  */
 export const port: Parser<number> = serializedValue => {
   if (!isPort(serializedValue)) {
-    throw new Error('value is not a port');
+    throw new EnvironmentVariableError('value is not a port');
   }
 
   const value = Number.parseInt(serializedValue, 10);
@@ -124,7 +128,7 @@ export function whitelist<TValue extends string>(
         .map(whitelistedValue => `'${whitelistedValue}'`)
         .join(', ');
 
-      throw new Error(
+      throw new EnvironmentVariableError(
         `value is not in the whitelist. Valid values are ${whitelistedValuesStr}`,
       );
     }
@@ -143,7 +147,9 @@ export function regex(pattern: RegExp): Parser<string> {
     const value = serializedValue;
 
     if (!pattern.test(value)) {
-      throw new Error(`value does not match regex ${pattern.toString()}`);
+      throw new EnvironmentVariableError(
+        `value does not match regex ${pattern.toString()}`,
+      );
     }
 
     return value;
@@ -185,7 +191,7 @@ export const positiveInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value <= 0) {
-    throw new Error('value is not positive');
+    throw new EnvironmentVariableError('value is not positive');
   }
 
   return value;
@@ -198,7 +204,7 @@ export const nonPositiveInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value > 0) {
-    throw new Error('value is positive');
+    throw new EnvironmentVariableError('value is positive');
   }
 
   return value;
@@ -211,7 +217,7 @@ export const negativeInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value >= 0) {
-    throw new Error('value is not negative');
+    throw new EnvironmentVariableError('value is not negative');
   }
 
   return value;
@@ -224,7 +230,7 @@ export const nonNegativeInteger: Parser<number> = serializedValue => {
   const value = integer(serializedValue);
 
   if (value < 0) {
-    throw new Error('value is negative');
+    throw new EnvironmentVariableError('value is negative');
   }
 
   return value;

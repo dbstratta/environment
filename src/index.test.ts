@@ -1,4 +1,4 @@
-import * as environment from './index';
+import * as environment from '.';
 
 describe('environment', () => {
   test('exports a function `makeEnv`', () => {
