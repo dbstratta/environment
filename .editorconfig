@@ -20,9 +20,6 @@ trim_trailing_whitespace = false
 [*.{json,yml}]
 indent_size = 2
 
-[nginx.conf]
-indent_size = 2
-
 [*.{html,xml}]
 indent_size = 2
 
