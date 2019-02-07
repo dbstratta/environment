@@ -15,8 +15,8 @@ export const string: Parser<string> = serializedValue => serializedValue;
  * Falsy values: false, 0, no.
  */
 export const boolean: Parser<boolean> = serializedValue => {
-  const truthyValues = ['true', '1', 'yes'];
-  const falsyValues = ['false', '0', 'no'];
+  const truthyValues = ['true', '1', 'yes', 'on'];
+  const falsyValues = ['false', '0', 'no', 'off'];
 
   const lowercaseSerializedValue = serializedValue.toLowerCase();
 

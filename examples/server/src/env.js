@@ -8,9 +8,9 @@ const env = makeEnv({
     envVarName: 'HOST',
   },
   port: {
-    parser: parsers.string,
+    parser: parsers.port,
     required: false,
-    defaultValue: '4000',
+    defaultValue: 4000,
     envVarName: 'PORT',
   },
 });

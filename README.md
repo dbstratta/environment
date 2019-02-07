@@ -68,7 +68,7 @@ yarn add @strattadb/environment
 or with npm:
 
 ```bash
-npm install --save @strattadb/environment
+npm install @strattadb/environment
 ```
 
 ## Usage
@@ -146,9 +146,9 @@ Trivial parser. It doesn't do any validation.
 
 Ensures the value is a truthy or falsy value.
 
-Truthy values: `'true'`, `'1'`, `'yes'`.
+Truthy values: `'true'`, `'1'`, `'yes'`, `'on'`.
 
-Falsy values: `'false'`, `'0'`, `'no'`.
+Falsy values: `'false'`, `'0'`, `'no'`, `'off'`.
 
 #### parsers.integer(value: string): number
 
@@ -370,7 +370,7 @@ Node.js version 10 or higher.
 
 ## Who's using environment
 
-- [loop](https://github.com/strattadb/loop)
+- [origen](https://github.com/origen-chat/api)
 
 ## Related libraries
 

@@ -11,7 +11,7 @@ describe('parsers.string', () => {
 
 describe('parsers.boolean', () => {
   test('parses a truthy value', () => {
-    const serializedTruthyValues = ['true', '1', 'yes'];
+    const serializedTruthyValues = ['true', '1', 'yes', 'on'];
     const expectedValue = true;
 
     serializedTruthyValues.forEach(serializedTruthyValue => {
@@ -20,7 +20,7 @@ describe('parsers.boolean', () => {
   });
 
   test('parses a falsy value', () => {
-    const serializedFalsyValues = ['false', '0', 'no'];
+    const serializedFalsyValues = ['false', '0', 'no', 'off'];
     const expectedValue = false;
 
     serializedFalsyValues.forEach(serializedFalsyValue => {

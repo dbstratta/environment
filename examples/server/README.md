@@ -13,7 +13,7 @@ yarn add @strattadb/environment
 or with npm:
 
 ```bash
-npm install --save @strattadb/environment
+npm install @strattadb/environment
 ```
 
 ### Running the server

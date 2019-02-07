@@ -16,7 +16,7 @@
     "clean-dist": "rimraf dist",
     "typecheck": "yarn tsc --noEmit",
     "tsc": "tsc",
-    "lint": "tslint --project .",
+    "lint": "yarn lint:check",
     "lint:check": "eslint \"src/**/*.{js,ts}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,ts}\"",
     "test": "cross-env NODE_ENV=test jest",
