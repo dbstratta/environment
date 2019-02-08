@@ -13,7 +13,7 @@ describe('makeEnv', () => {
   test('makes an empty env object if schema is empty', () => {
     const env = makeEnv({});
 
-    expect(Object.keys(env)).toEqual([]);
+    expect(Object.keys(env)).toHaveLength(0);
   });
 
   test('the env object has the keys specified in the schema', () => {
