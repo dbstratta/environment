@@ -105,6 +105,25 @@ describe('makeEnv', () => {
       }),
     ).toThrow();
   });
+
+  test('throws an error with a message containing the variable description if it has been provided', () => {
+    mockProcessEnv({});
+
+    const description = 'this is a description';
+
+    try {
+      makeEnv({
+        varWithDescription: {
+          parser: parsers.string,
+          required: true,
+          envVarName: 'VAR_WITH_DESCRIPTION',
+          description,
+        },
+      });
+    } catch (error) {
+      expect((error as Error).message).toContain(description);
+    }
+  });
 });
 
 const savedProcessEnv: NodeJS.ProcessEnv = { ...process.env };
