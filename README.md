@@ -10,52 +10,54 @@ Environment variable configuration for Node.js made easy.
 
 ## The problem
 
-Every application needs to ensure that some environment variables are
+A lot of applications need to ensure that some environment variables are
 set from the beginning, and checking if the value in `process.env` is `undefined`
 every time is needed gets tedious very fast.
 
 `environment` allows applications to ensure required env variables are set and are valid according
-to your definition of valid. See [how to use it](#usage).
+to _your_ definition of valid. See [how to use it](#usage).
 
 ## Table of Contents
 
-- [The problem](#the-problem)
-- [Table of Contents](#table-of-contents)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Examples](#examples)
-- [API](#api)
-  - [makeEnv(schema: Schema): Env](#makeenvschema-schema-env)
-  - [Parsers](#parsers)
-    - [parsers.string(value: string): string](#parsersstringvalue-string-string)
-    - [parsers.boolean(value: string): boolean](#parsersbooleanvalue-string-boolean)
-    - [parsers.integer(value: string): number](#parsersintegervalue-string-number)
-    - [parsers.float(value: string): float](#parsersfloatvalue-string-float)
-    - [parsers.email(value: string): string](#parsersemailvalue-string-string)
-    - [parsers.url(value: string): string](#parsersurlvalue-string-string)
-    - [parsers.ipAddress(value: string): string](#parsersipaddressvalue-string-string)
-    - [parsers.port(value: string): number](#parsersportvalue-string-number)
-    - [parsers.whitelist(whitelistedValues: string[]): Parser\<string\>](#parserswhitelistwhitelistedvalues-string-parserstring)
-    - [parsers.regex(pattern: Regex): Parser\<string\>](#parsersregexpattern-regex-parserstring)
-    - [parsers.array\<T\>({ parser: Parser\<T\>, separator?: string }): Parser\<T\>](#parsersarrayt-parser-parsert-separator-string--parsert)
-    - [parsers.positiveInteger(value: string): number](#parserspositiveintegervalue-string-number)
-    - [parsers.nonPositiveInteger(value: string): number](#parsersnonpositiveintegervalue-string-number)
-    - [parsers.negativeInteger(value: string): number](#parsersnegativeintegervalue-string-number)
-    - [parsers.nonNegativeInteger(value: string): number](#parsersnonnegativeintegervalue-string-number)
-- [Recipes](#recipes)
-  - [Making environment variables required](#making-environment-variables-required)
-  - [Specifying a default value for when the env variable is not required](#specifying-a-default-value-for-when-the-env-variable-is-not-required)
-  - [Providing a custom parser](#providing-a-custom-parser)
-  - [Usage with Dotenv](#usage-with-dotenv)
-- [FAQ](#faq)
-  - [Where should I call `makeEnv` in my application?](#where-should-i-call-makeenv-in-my-application)
-  - [Does it support changing env variables dynamically?](#does-it-support-changing-env-variables-dynamically)
-  - [Can I have more than one env object per application?](#can-i-have-more-than-one-env-object-per-application)
-- [Node.js support](#nodejs-support)
-- [Maintainers](#maintainers)
-- [Who's using environment](#whos-using-environment)
-- [Related libraries](#related-libraries)
-- [License](#license)
+- [environment](#environment)
+  - [The problem](#the-problem)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Examples](#examples)
+  - [API](#api)
+    - [`makeEnv(schema: Schema, processEnv?: { [key: string]: string | undefined }): Env`](#makeenvschema-schema-processenv--key-string-string--undefined--env)
+    - [Parsers](#parsers)
+      - [`parsers.string(value: string): string`](#parsersstringvalue-string-string)
+      - [`parsers.boolean(value: string): boolean`](#parsersbooleanvalue-string-boolean)
+      - [`parsers.integer(value: string): number`](#parsersintegervalue-string-number)
+      - [`parsers.float(value: string): number`](#parsersfloatvalue-string-number)
+      - [`parsers.email(value: string): string`](#parsersemailvalue-string-string)
+      - [`parsers.url(value: string): string`](#parsersurlvalue-string-string)
+      - [`parsers.ipAddress(value: string): string`](#parsersipaddressvalue-string-string)
+      - [`parsers.port(value: string): number`](#parsersportvalue-string-number)
+      - [`parsers.whitelist(whitelistedValues: string[]): Parser\<string\>`](#parserswhitelistwhitelistedvalues-string-parserstring)
+      - [`parsers.regex(pattern: Regex): Parser\<string\>`](#parsersregexpattern-regex-parserstring)
+      - [`parsers.array\<T\>({ parser: Parser\<T\>, separator?: string }): Parser\<T\>`](#parsersarrayt-parser-parsert-separator-string--parsert)
+      - [`parsers.positiveInteger(value: string): number`](#parserspositiveintegervalue-string-number)
+      - [`parsers.nonPositiveInteger(value: string): number`](#parsersnonpositiveintegervalue-string-number)
+      - [`parsers.negativeInteger(value: string): number`](#parsersnegativeintegervalue-string-number)
+      - [`parsers.nonNegativeInteger(value: string): number`](#parsersnonnegativeintegervalue-string-number)
+  - [Recipes](#recipes)
+    - [Making environment variables required](#making-environment-variables-required)
+    - [Specifying a default value for when the env variable is not required](#specifying-a-default-value-for-when-the-env-variable-is-not-required)
+    - [Providing a custom parser](#providing-a-custom-parser)
+    - [Usage with Dotenv](#usage-with-dotenv)
+    - [Providing your own processEnv object](#providing-your-own-processenv-object)
+  - [FAQ](#faq)
+    - [Where should I call `makeEnv` in my application?](#where-should-i-call-makeenv-in-my-application)
+    - [Does it support changing env variables dynamically?](#does-it-support-changing-env-variables-dynamically)
+    - [Can I have more than one env object per application?](#can-i-have-more-than-one-env-object-per-application)
+  - [Node.js support](#nodejs-support)
+  - [Maintainers](#maintainers)
+  - [Who's using environment](#whos-using-environment)
+  - [Related libraries](#related-libraries)
+  - [License](#license)
 
 ## Installation
 
@@ -76,10 +78,12 @@ npm install @strattadb/environment
 An example `env.js` file:
 
 ```javascript
+// env.js
+
 import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
-  environment: {
+  nodeEnv: {
     parser: parsers.whitelist(['production', 'development', 'test']),
     required: true,
     envVarName: 'NODE_ENV',
@@ -98,10 +102,15 @@ export default env;
 Now in a file:
 
 ```javascript
+// otherFile.js
+
 import env from './env';
 
-console.log(env.environment); // development
+console.log(env.nodeEnv); // development
+console.log(typeof env.nodeEnv); // string
+
 console.log(env.port); // 4000
+console.log(typeof env.port); // number
 ```
 
 ## Examples
@@ -110,9 +119,13 @@ console.log(env.port); // 4000
 
 ## API
 
-### makeEnv(schema: Schema): Env
+### `makeEnv(schema: Schema, processEnv?: { [key: string]: string | undefined }): Env`
 
 Ensures required env variables are present and returns an env object.
+
+Supports passing a processEnv object as the second argument.
+If it's not passed, it uses `process.env`.
+This object will be used to look up the environment variables.
 
 - **Schema**:
 
@@ -138,11 +151,11 @@ Ensures required env variables are present and returns an env object.
 
 ### Parsers
 
-#### parsers.string(value: string): string
+#### `parsers.string(value: string): string`
 
 Trivial parser. It doesn't do any validation.
 
-#### parsers.boolean(value: string): boolean
+#### `parsers.boolean(value: string): boolean`
 
 Ensures the value is a truthy or falsy value.
 
@@ -150,31 +163,31 @@ Truthy values: `'true'`, `'1'`, `'yes'`, `'on'`.
 
 Falsy values: `'false'`, `'0'`, `'no'`, `'off'`.
 
-#### parsers.integer(value: string): number
+#### `parsers.integer(value: string): number`
 
 Ensures the value is an integer.
 
-#### parsers.float(value: string): float
+#### `parsers.float(value: string): number`
 
 Ensures the value is a float.
 
-#### parsers.email(value: string): string
+#### `parsers.email(value: string): string`
 
 Ensures the value is an email.
 
-#### parsers.url(value: string): string
+#### `parsers.url(value: string): string`
 
 Ensures the value is a url.
 
-#### parsers.ipAddress(value: string): string
+#### `parsers.ipAddress(value: string): string`
 
 Ensures the value is an IP address.
 
-#### parsers.port(value: string): number
+#### `parsers.port(value: string): number`
 
 Ensures the value is a port.
 
-#### parsers.whitelist(whitelistedValues: string[]): Parser\<string\>
+#### `parsers.whitelist(whitelistedValues: string[]): Parser\<string\>`
 
 Takes a list of valid values and returns a parser that
 ensures the value is in the whitelist.
@@ -193,7 +206,7 @@ const env = makeEnv({
 });
 ```
 
-#### parsers.regex(pattern: Regex): Parser\<string\>
+#### `parsers.regex(pattern: Regex): Parser\<string\>`
 
 Takes a regex and returns a parser that
 ensures the value matches the pattern.
@@ -212,7 +225,7 @@ const env = makeEnv({
 });
 ```
 
-#### parsers.array\<T\>({ parser: Parser\<T\>, separator?: string }): Parser\<T\>
+#### `parsers.array\<T\>({ parser: Parser\<T\>, separator?: string }): Parser\<T\>`
 
 Takes a parser and returns a parser that parses a list of values.
 The default value separator is ','.
@@ -231,19 +244,19 @@ const env = makeEnv({
 });
 ```
 
-#### parsers.positiveInteger(value: string): number
+#### `parsers.positiveInteger(value: string): number`
 
 Ensures the value is a positive integer.
 
-#### parsers.nonPositiveInteger(value: string): number
+#### `parsers.nonPositiveInteger(value: string): number`
 
 Ensures the value is a non-positive integer.
 
-#### parsers.negativeInteger(value: string): number
+#### `parsers.negativeInteger(value: string): number`
 
 Ensures the value is a negative integer.
 
-#### parsers.nonNegativeInteger(value: string): number
+#### `parsers.nonNegativeInteger(value: string): number`
 
 Ensures the value is a non-negative integer.
 
@@ -338,6 +351,29 @@ const env = makeEnv({
     envVarName: 'SECRET_TOKEN',
   },
 });
+```
+
+### Providing your own processEnv object
+
+By default, `makeEnv` uses `process.env` to look up and get environment variables,
+but you can pass you own processEnv object as the second argument that will
+be used instead of `process.env`:
+
+```javascript
+import { makeEnv, parsers } from '@strattadb/environment';
+
+const env = makeEnv(
+  {
+    hello: {
+      parser: parsers.string,
+      required: true,
+      envVarName: 'HELLO',
+    },
+  },
+  {
+    HELLO: 'WORLD',
+  },
+);
 ```
 
 ## FAQ

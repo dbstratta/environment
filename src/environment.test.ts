@@ -17,43 +17,135 @@ describe('makeEnv', () => {
   });
 
   test('the env object has the keys specified in the schema', () => {
+    const testIntegerDefaultValue = 100;
+    const testStringDefaultValue = 'test';
+
     const env = makeEnv({
       testInteger: {
         parser: parsers.integer,
         required: false,
-        defaultValue: 100,
+        defaultValue: testIntegerDefaultValue,
         envVarName: 'ENV_TEST_INTEGER',
       },
       testString: {
         parser: parsers.string,
         required: false,
-        defaultValue: 'test',
+        defaultValue: testStringDefaultValue,
         envVarName: 'ENV_TEST_STRING',
       },
     });
 
     expect(typeof env.testString).toBe('string');
-    expect(env.testString).toBe('test');
+    expect(env.testString).toBe(testStringDefaultValue);
 
     expect(typeof env.testInteger).toBe('number');
-    expect(env.testInteger).toBe(100);
+    expect(env.testInteger).toBe(testIntegerDefaultValue);
   });
 
   test('throws if a required env var is not set', () => {
-    mockProcessEnv({});
+    const processEnv = {};
 
     expect(() =>
-      makeEnv({
-        notSet: {
-          parser: parsers.string,
-          required: true,
-          envVarName: 'ENV_VAR_NOT_SET',
+      makeEnv(
+        {
+          notSet: {
+            parser: parsers.string,
+            required: true,
+            envVarName: 'ENV_VAR_NOT_SET',
+          },
         },
-      }),
+        processEnv,
+      ),
     ).toThrow();
   });
 
   test('loads the env object with process.env data', () => {
+    const envVarName = 'ENV_TEST';
+    const envVarValue = '10';
+
+    const processEnv = { [envVarName]: envVarValue };
+
+    const env = makeEnv(
+      {
+        test: {
+          parser: parsers.integer,
+          required: true,
+          envVarName,
+        },
+      },
+      processEnv,
+    );
+
+    const expectedValue = 10;
+
+    expect(env.test).toBe(expectedValue);
+  });
+
+  test('falls back to defaultValue if the env var is not set and is not required', () => {
+    const envVarName = 'ENV_TEST';
+
+    const processEnv = { [envVarName]: undefined };
+
+    const defaultValue = 10;
+
+    const env = makeEnv(
+      {
+        test: {
+          parser: parsers.integer,
+          required: false,
+          defaultValue,
+          envVarName,
+        },
+      },
+      processEnv,
+    );
+
+    const expectedValue = defaultValue;
+
+    expect(env.test).toBe(expectedValue);
+  });
+
+  test('throws if the parser throws', () => {
+    const envVarName = 'NOT_A_NUMBER';
+    const processEnv = { [envVarName]: 'NaN' };
+
+    expect(() =>
+      makeEnv(
+        {
+          notANumber: {
+            parser: parsers.integer,
+            required: true,
+            envVarName,
+          },
+        },
+        processEnv,
+      ),
+    ).toThrow();
+  });
+
+  test('throws an error with a message containing the variable description if it has been provided', () => {
+    const processEnv = {};
+
+    const description = 'this is a description';
+
+    try {
+      makeEnv(
+        {
+          varWithDescription: {
+            parser: parsers.string,
+            required: true,
+            envVarName: 'VAR_WITH_DESCRIPTION',
+            description,
+          },
+        },
+        processEnv,
+      );
+    } catch (error) {
+      expect((error as Error).message).toContain(description);
+    }
+  });
+
+  test('uses process.env if the processEnv argument is not provided', () => {
     const envVarName = 'ENV_TEST';
     const envVarValue = '10';
 
@@ -68,65 +160,12 @@ describe('makeEnv', () => {
     });
 
     const expectedValue = 10;
+
     expect(env.test).toBe(expectedValue);
-  });
-
-  test('falls back to defaultValue if the env var is not set and is not required', () => {
-    const envVarName = 'ENV_TEST';
-
-    mockProcessEnv({ [envVarName]: undefined });
-
-    const defaultValue = 10;
-
-    const env = makeEnv({
-      test: {
-        parser: parsers.integer,
-        required: false,
-        defaultValue,
-        envVarName,
-      },
-    });
-
-    const expectedValue = defaultValue;
-    expect(env.test).toBe(expectedValue);
-  });
-
-  test('throws if the parser throws', () => {
-    const envVarName = 'NOT_A_NUMBER';
-    mockProcessEnv({ [envVarName]: 'NaN' });
-
-    expect(() =>
-      makeEnv({
-        notANumber: {
-          parser: parsers.integer,
-          required: true,
-          envVarName,
-        },
-      }),
-    ).toThrow();
-  });
-
-  test('throws an error with a message containing the variable description if it has been provided', () => {
-    mockProcessEnv({});
-
-    const description = 'this is a description';
-
-    try {
-      makeEnv({
-        varWithDescription: {
-          parser: parsers.string,
-          required: true,
-          envVarName: 'VAR_WITH_DESCRIPTION',
-          description,
-        },
-      });
-    } catch (error) {
-      expect((error as Error).message).toContain(description);
-    }
   });
 });
 
-const savedProcessEnv: NodeJS.ProcessEnv = { ...process.env };
+const savedProcessEnv: NodeJS.ProcessEnv = process.env;
 
 function mockProcessEnv(mockedProcessEnv: NodeJS.ProcessEnv): void {
   process.env = mockedProcessEnv;

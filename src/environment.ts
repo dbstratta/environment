@@ -43,9 +43,10 @@ export type SchemaEntryRequiredInfo<TType> =
  */
 export function makeEnv<TSchemaData extends { [key: string]: any }>(
   schema: Schema<TSchemaData>,
+  processEnv: NodeJS.ProcessEnv = process.env,
 ): Env<TSchemaData> {
   const env = Object.entries(schema).reduce((acc, [key, schemaEntry]) => {
-    const value = getValue(key, schemaEntry as any);
+    const value = getValue(key, schemaEntry as any, processEnv);
 
     return { ...acc, [key]: value };
   }, {}) as Env<TSchemaData>;
@@ -53,8 +54,12 @@ export function makeEnv<TSchemaData extends { [key: string]: any }>(
   return env;
 }
 
-function getValue<TType>(key: string, schemaEntry: SchemaEntry<TType>): TType {
-  const envVarValue = process.env[schemaEntry.envVarName];
+function getValue<TType>(
+  key: string,
+  schemaEntry: SchemaEntry<TType>,
+  processEnv: NodeJS.ProcessEnv,
+): TType {
+  const envVarValue = processEnv[schemaEntry.envVarName];
 
   if (envVarValue === undefined) {
     if (schemaEntry.required) {
