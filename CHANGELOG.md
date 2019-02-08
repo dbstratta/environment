@@ -1,5 +1,12 @@
 # Changelog
 
+# [6.1.0](https://github.com/strattadb/environment/compare/v6.0.0...v6.1.0) (2019-02-08)
+
+
+### Features
+
+* support passing your own processEnv object ([259acfd](https://github.com/strattadb/environment/commit/259acfd))
+
 # [6.0.0](https://github.com/strattadb/environment/compare/v5.2.0...v6.0.0) (2019-02-07)
 
 
