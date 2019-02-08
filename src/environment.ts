@@ -14,6 +14,10 @@ export type Schema<TSchemaData> = {
 };
 
 export type SchemaEntry<TType> = {
+  /**
+   * The parser function used to parse
+   * the environment variable string.
+   */
   parser: Parser<TType>;
   /**
    * The name of the environment variable variable to look up.
