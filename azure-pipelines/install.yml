@@ -1,0 +1,11 @@
+parameters:
+  nodeVersion: 'node'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: ${{ parameters.nodeVersion }}
+    displayName: 'Install Node.js'
+
+  - script: yarn install
+    displayName: 'Install dependencies'

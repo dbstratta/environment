@@ -1,3 +1,5 @@
+nodeVersion: &nodeVersion '11.9.0'
+
 jobs:
   - job: test
     displayName: 'Test'
@@ -15,13 +17,9 @@ jobs:
           node_version: 11.x
 
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: $(node_version)
-        displayName: 'Install Node.js'
-
-      - script: yarn install
-        displayName: 'Install dependencies'
+      - template: azure-pipelines/install.yml
+        parameters:
+          nodeVersion: $(node_version)
 
       - script: yarn lint:check
         displayName: 'Linter check'
@@ -39,13 +37,9 @@ jobs:
       vmImage: 'ubuntu-16.04'
 
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '11.9.0'
-        displayName: 'Install Node.js'
-
-      - script: yarn install
-        displayName: 'Install dependencies'
+      - template: azure-pipelines/install.yml
+        parameters:
+          nodeVersion: *nodeVersion
 
       - script: yarn test:ci
         displayName: 'Test'
@@ -66,13 +60,9 @@ jobs:
       vmImage: 'ubuntu-16.04'
 
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '11.9.0'
-        displayName: 'Install Node.js'
-
-      - script: yarn install
-        displayName: 'Install dependencies'
+      - template: azure-pipelines/install.yml
+        parameters:
+          nodeVersion: *nodeVersion
 
       - script: yarn build
         displayName: 'Build'

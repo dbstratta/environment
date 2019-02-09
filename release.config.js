@@ -22,4 +22,5 @@ module.exports = {
   branch: 'master',
   verifyConditions: [changelogPlugin, npmPlugin, gitPlugin, githubPlugin],
   prepare: [changelogPlugin, npmPlugin, gitPlugin],
+  success: [],
 };
