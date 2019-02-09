@@ -1,0 +1,3 @@
+steps:
+  - script: yarn test:ci
+    displayName: 'Test'

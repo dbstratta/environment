@@ -25,8 +25,7 @@ jobs:
       - script: yarn typecheck
         displayName: 'Typecheck'
 
-      - script: yarn test:ci
-        displayName: 'Test'
+      - template: azure-pipelines/test.yml
 
   - job: coverage
     displayName: 'Coverage'
@@ -39,8 +38,7 @@ jobs:
         parameters:
           nodeVersion: $(defaultNodeVersion)
 
-      - script: yarn test:ci
-        displayName: 'Test'
+      - template: azure-pipelines/test.yml
 
       - script: yarn upload-coverage
         env:
