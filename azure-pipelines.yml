@@ -1,5 +1,3 @@
-nodeVersion: &nodeVersion '11.9.0'
-
 jobs:
   - job: test
     displayName: 'Test'
@@ -39,7 +37,7 @@ jobs:
     steps:
       - template: azure-pipelines/install.yml
         parameters:
-          nodeVersion: *nodeVersion
+          nodeVersion: $(defaultNodeVersion)
 
       - script: yarn test:ci
         displayName: 'Test'
@@ -62,7 +60,7 @@ jobs:
     steps:
       - template: azure-pipelines/install.yml
         parameters:
-          nodeVersion: *nodeVersion
+          nodeVersion: $(defaultNodeVersion)
 
       - script: yarn build
         displayName: 'Build'
@@ -75,3 +73,5 @@ jobs:
 
 variables:
   CI: true
+  defaultNodeVersion: '11.9.0'
+
