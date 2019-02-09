@@ -1,44 +1,87 @@
-pool:
-  vmImage: 'ubuntu-16.04'
-
-strategy:
-  matrix:
-    node_8_x:
-      node_version: 8.x
-    node_9_x:
-      node_version: 9.x
-    node_10_x:
-      node_version: 10.x
-    node_11_x:
-      node_version: 11.x
-
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: $(node_version)
-    displayName: 'Install Node.js'
-
-
-  - script: yarn install
-    displayName: 'Install dependencies'
-
-  - script: yarn lint:check
-    displayName: 'Linter check'
-
-  - script: yarn typecheck
-    displayName: 'Typecheck'
-
-  - script: yarn test:ci
+jobs:
+  - job: test
     displayName: 'Test'
 
-  - script: yarn upload-coverage
-    env:
-      CODECOV_TOKEN: $(CODECOV_TOKEN)
-    displayName: 'Upload coverage report'
+    pool:
+      vmImage: 'ubuntu-16.04'
 
-  - script: yarn semantic-release
+    strategy:
+      matrix:
+        node_8_x:
+          node_version: 8.x
+        node_10_x:
+          node_version: 10.x
+        node_11_x:
+          node_version: 11.x
+
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: $(node_version)
+        displayName: 'Install Node.js'
+
+      - script: yarn install
+        displayName: 'Install dependencies'
+
+      - script: yarn lint:check
+        displayName: 'Linter check'
+
+      - script: yarn typecheck
+        displayName: 'Typecheck'
+
+      - script: yarn test:ci
+        displayName: 'Test'
+
+  - job: coverage
+    displayName: 'Coverage'
+
+    pool:
+      vmImage: 'ubuntu-16.04'
+
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '11.9.0'
+        displayName: 'Install Node.js'
+
+      - script: yarn install
+        displayName: 'Install dependencies'
+
+      - script: yarn test:ci
+        displayName: 'Test'
+
+      - script: yarn upload-coverage
+        env:
+          CODECOV_TOKEN: $(CODECOV_TOKEN)
+        displayName: 'Upload coverage report'
+
+
+  - job: publish
+    displayName: 'Publish'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    env:
-      GITHUB_TOKEN: $(GITHUB_TOKEN)
-      NPM_TOKEN: $(NPM_TOKEN)
-    displayName: 'Release'
+
+    dependsOn: test
+
+    pool:
+      vmImage: 'ubuntu-16.04'
+
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '11.9.0'
+        displayName: 'Install Node.js'
+
+      - script: yarn install
+        displayName: 'Install dependencies'
+
+      - script: yarn build
+        displayName: 'Build'
+
+      - script: yarn semantic-release
+        env:
+          GITHUB_TOKEN: $(GITHUB_TOKEN)
+          NPM_TOKEN: $(NPM_TOKEN)
+        displayName: 'Release'
+
+variables:
+  CI: true
