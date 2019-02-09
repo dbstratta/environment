@@ -1,7 +1,7 @@
 {
   "name": "@strattadb/environment",
   "version": "6.1.0",
-  "description": "Environment variable configuration for Node.js made easy",
+  "description": "Environment variable configuration for Node.js made easy.",
   "main": "dist/index.js",
   "homepage": "https://github.com/strattadb/environment",
   "repository": {
@@ -12,7 +12,7 @@
     "build": "yarn build-lib && yarn build-types",
     "build-lib": "cross-env NODE_ENV=production babel --extensions \".ts\" --out-dir dist src",
     "build-types": "tsc --emitDeclarationOnly",
-    "prebuild": "yarn clean-dist && yarn typecheck && yarn lint:check && yarn test",
+    "prebuild": "yarn clean-dist",
     "clean-dist": "rimraf dist",
     "typecheck": "tsc --noEmit",
     "lint": "yarn lint:check",
@@ -22,7 +22,7 @@
     "test:watch": "yarn test --onlyChanged --watch",
     "test:ci": "yarn test --verbose --ci --coverage",
     "test:debug": "cross-env NODE_ENV=test node --inspect-brk=0.0.0.0:9229 --nolazy node_modules/.bin/jest --runInBand",
-    "coverage": "codecov",
+    "upload-coverage": "codecov",
     "commit": "commit",
     "semantic-release": "semantic-release"
   },
@@ -97,6 +97,6 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 10"
+    "node": ">= 8"
   }
 }

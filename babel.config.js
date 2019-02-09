@@ -9,7 +9,7 @@ module.exports = api => {
       '@babel/preset-env',
       {
         targets: {
-          node: 10,
+          node: 8,
         },
         debug,
         useBuiltIns,
