@@ -2375,10 +2375,10 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
-danger@7.0.11:
-  version "7.0.11"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-7.0.11.tgz#6bf0a4a2d9eb53f389412171c03b075d2ac1fce4"
-  integrity sha512-KwPD0qFEr5NqUH0RFynO6c2KMNa9n6ZgwsVw8WUuJct9THT5cMsSBzX3Gm/bLwSCVugc8H/9xhI06o6DycS8Ww==
+danger@7.0.12:
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-7.0.12.tgz#bba12a496adcc7a1e30619404bc13a3c6d9ba915"
+  integrity sha512-pew8vsBs2bitXt5upLuvfEAqvVuvzLoo/BjX7ysGI3yXQ8X7vrESo1/gGRvkA4uaDEoDq7LaBR4xhxfqxk9fog==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.14.1"
