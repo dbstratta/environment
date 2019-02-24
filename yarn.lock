@@ -2376,10 +2376,10 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
-danger@7.0.13:
-  version "7.0.13"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-7.0.13.tgz#41e9b64db1f0875a5b86834224fc7ee1a19ef8d0"
-  integrity sha512-6tHEWYCCycI0szlodbxDUR4d91l3Gu33ChrowvJOYZ5P9VhxTkmamWC04b3f5qgxkrFsQCTiuAL8eqvMQyOQyw==
+danger@7.0.14:
+  version "7.0.14"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-7.0.14.tgz#c600b463f591a5c8aeac926b6066cf415ecd6e88"
+  integrity sha512-8JoWH5wge25vo0ROSplA+edy2PVk5Ttn7iR7oEq/XwWxp18lHG4B8JuYgMWqp68EcJbJlKxTWQfmANJudmJuiA==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@octokit/rest" "^16.14.1"
@@ -2398,6 +2398,7 @@ danger@7.0.13:
     lodash.includes "^4.3.0"
     lodash.isobject "^3.0.2"
     lodash.keys "^4.0.8"
+    lodash.memoize "^4.1.2"
     memfs-or-file-map-to-github-branch "^1.1.0"
     node-cleanup "^2.1.2"
     node-fetch "^2.3.0"
