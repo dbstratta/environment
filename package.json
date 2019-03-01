@@ -21,6 +21,7 @@
     "test": "cross-env NODE_ENV=test jest",
     "test:watch": "yarn test --onlyChanged --watch",
     "test:ci": "yarn test --verbose --ci --coverage",
+    "test:coverage": "yarn test --coverage",
     "test:debug": "cross-env NODE_ENV=test node --inspect-brk=0.0.0.0:9229 --nolazy node_modules/.bin/jest --runInBand",
     "upload-coverage": "codecov",
     "commit": "commit",

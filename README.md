@@ -55,6 +55,7 @@ to _your_ definition of valid. See [how to use it](#usage).
     - [Can I use the `debug` module with `environment`?](#can-i-use-the-debug-module-with-environment)
     - [Can I have more than one env object per application?](#can-i-have-more-than-one-env-object-per-application)
   - [Node.js support](#nodejs-support)
+  - [Contributing](#contributing)
   - [Maintainers](#maintainers)
   - [Who's using environment](#whos-using-environment)
   - [Related libraries](#related-libraries)
@@ -404,6 +405,11 @@ Yes! You can have as many env objects as you want!
 ## Node.js support
 
 Node.js version 8 or higher. It's actively tested in 8, 10 and 11.
+
+## Contributing
+
+PRs, feature requests, bug reports, and any kind of contributions are welcome!
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Maintainers
 
