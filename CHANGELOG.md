@@ -1,5 +1,12 @@
 # Changelog
 
+# [6.2.0](https://github.com/strattadb/environment/compare/v6.1.0...v6.2.0) (2019-03-01)
+
+
+### Features
+
+* use `debug` module to help debugging ([14668b1](https://github.com/strattadb/environment/commit/14668b1))
+
 # [6.1.0](https://github.com/strattadb/environment/compare/v6.0.0...v6.1.0) (2019-02-08)
 
 
