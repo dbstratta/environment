@@ -46,7 +46,7 @@
     "@semantic-release/git": "7.0.8",
     "@types/debug": "4.1.2",
     "@types/jest": "24.0.9",
-    "@types/node": "11.9.6",
+    "@types/node": "11.10.0",
     "@types/validator": "10.9.0",
     "@typescript-eslint/eslint-plugin": "1.4.2",
     "@typescript-eslint/parser": "1.4.2",
