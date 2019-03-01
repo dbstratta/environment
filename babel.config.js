@@ -1,7 +1,7 @@
 module.exports = api => {
   const babelEnv = api.env();
 
-  const debug = !!process.env.DEBUG;
+  const debug = !!process.env.DEBUG_BABEL;
   const useBuiltIns = false;
 
   const presets = [

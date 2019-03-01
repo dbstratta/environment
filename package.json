@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "yarn build-lib && yarn build-types",
-    "build-lib": "cross-env NODE_ENV=production babel --extensions \".ts\" --out-dir dist src",
+    "build-lib": "cross-env NODE_ENV=production babel --source-maps --extensions \".ts\" --out-dir dist src",
     "build-types": "tsc --emitDeclarationOnly",
     "prebuild": "yarn clean-dist",
     "clean-dist": "rimraf dist",
@@ -29,6 +29,7 @@
   "types": "dist/index.d.ts",
   "private": false,
   "dependencies": {
+    "debug": "^4.1.1",
     "validator": "^10.11.0"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "@commitlint/travis-cli": "7.5.0",
     "@semantic-release/changelog": "3.0.2",
     "@semantic-release/git": "7.0.8",
+    "@types/debug": "^4.1.2",
     "@types/jest": "24.0.0",
     "@types/node": "10.12.24",
     "@types/validator": "10.9.0",

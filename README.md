@@ -52,6 +52,7 @@ to _your_ definition of valid. See [how to use it](#usage).
   - [FAQ](#faq)
     - [Where should I call `makeEnv` in my application?](#where-should-i-call-makeenv-in-my-application)
     - [Does it support changing env variables dynamically?](#does-it-support-changing-env-variables-dynamically)
+    - [Can I use the `debug` module with `environment`?](#can-i-use-the-debug-module-with-environment)
     - [Can I have more than one env object per application?](#can-i-have-more-than-one-env-object-per-application)
   - [Node.js support](#nodejs-support)
   - [Maintainers](#maintainers)
@@ -391,6 +392,10 @@ No, when you create an env object it will read the value of
 `process.env` at that time. After that, if anything makes
 changes to `process.env`, it will not be reflected in the
 env object.
+
+### Can I use the [`debug`](https://github.com/visionmedia/debug) module with `environment`?
+
+Yes! Set `DEBUG=environment`.
 
 ### Can I have more than one env object per application?
 

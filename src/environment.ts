@@ -1,5 +1,6 @@
 import EnvironmentVariableError from './EnvironmentVariableError';
 import { Parser } from './parsers';
+import { logDebug } from './debug';
 
 export type Env<TSchemaData> = {
   [TKey in keyof Schema<TSchemaData>]: TSchemaData[TKey]
@@ -49,11 +50,15 @@ export function makeEnv<TSchemaData extends { [key: string]: any }>(
   schema: Schema<TSchemaData>,
   processEnv: NodeJS.ProcessEnv = process.env,
 ): Env<TSchemaData> {
+  logDebug('making env object...');
+
   const env = Object.entries(schema).reduce((acc, [key, schemaEntry]) => {
     const value = getValue(key, schemaEntry as any, processEnv);
 
     return { ...acc, [key]: value };
   }, {}) as Env<TSchemaData>;
+
+  logDebug('env object ready: %o', env);
 
   return env;
 }
