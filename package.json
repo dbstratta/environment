@@ -76,7 +76,7 @@
     "prettier-eslint-cli": "4.7.1",
     "rimraf": "2.6.3",
     "semantic-release": "15.13.3",
-    "typescript": "3.4.2"
+    "typescript": "3.4.3"
   },
   "keywords": [
     "environment",
