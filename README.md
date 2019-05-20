@@ -404,7 +404,7 @@ Yes! You can have as many env objects as you want!
 
 ## Node.js support
 
-Node.js version 8 or higher. It's actively tested in 8, 10 and 11.
+Node.js version 8 or higher. Every version is tested in 8, 10, 11 and 12.
 
 ## Contributing
 

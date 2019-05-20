@@ -13,6 +13,8 @@ jobs:
           node_version: 10.x
         node_11_x:
           node_version: 11.x
+        node_12_x:
+          node_version: 12.x
 
     steps:
       - template: azure-pipelines/install.yml
@@ -71,5 +73,5 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '11.9.0'
+  defaultNodeVersion: '12.2.0'
 
