@@ -1,5 +1,17 @@
 # Changelog
 
+# [7.0.0](https://github.com/strattadb/environment/compare/v6.2.0...v7.0.0) (2019-05-20)
+
+
+### Bug Fixes
+
+* export regex parser and fix whitelist type ([4bba415](https://github.com/strattadb/environment/commit/4bba415))
+
+
+### BREAKING CHANGES
+
+* drop support for TypeScript versions 3.3 and lower.
+
 # [6.2.0](https://github.com/strattadb/environment/compare/v6.1.0...v6.2.0) (2019-03-01)
 
 
