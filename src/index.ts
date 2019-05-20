@@ -13,6 +13,7 @@ import {
   string,
   url,
   whitelist,
+  regex,
 } from './parsers';
 
 const parsers = {
@@ -29,6 +30,7 @@ const parsers = {
   nonPositiveInteger,
   negativeInteger,
   nonNegativeInteger,
+  regex,
 };
 
 export { Parser, parsers };

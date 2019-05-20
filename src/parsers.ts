@@ -118,18 +118,18 @@ export const port: Parser<number> = serializedValue => {
  * a list of whitelisted values.
  */
 export function whitelist<TValue extends string>(
-  whitelistedValues: ReadonlyArray<TValue>,
+  whitelistedValues: readonly TValue[],
 ): Parser<TValue> {
   const whitelistParser: Parser<TValue> = serializedValue => {
     const value = serializedValue;
 
-    if (!(whitelistedValues as ReadonlyArray<string>).includes(value)) {
-      const whitelistedValuesStr = whitelistedValues
+    if (!(whitelistedValues as readonly string[]).includes(value)) {
+      const whitelistedValuesString = whitelistedValues
         .map(whitelistedValue => `'${whitelistedValue}'`)
         .join(', ');
 
       throw new EnvironmentVariableError(
-        `value is not in the whitelist. Valid values are ${whitelistedValuesStr}`,
+        `value is not in the whitelist. Valid values are ${whitelistedValuesString}`,
       );
     }
 
@@ -143,7 +143,7 @@ export function whitelist<TValue extends string>(
  * Returns a parser that parses a value matching a regular expression.
  */
 export function regex(pattern: RegExp): Parser<string> {
-  const whitelistParser: Parser<string> = serializedValue => {
+  const regexParser: Parser<string> = serializedValue => {
     const value = serializedValue;
 
     if (!pattern.test(value)) {
@@ -155,7 +155,7 @@ export function regex(pattern: RegExp): Parser<string> {
     return value;
   };
 
-  return whitelistParser;
+  return regexParser;
 }
 
 export type ArrayParserArgs<TType> = Readonly<{
@@ -170,10 +170,10 @@ const defaultArraySeparator = ',';
  */
 export function array<TType>(
   args: ArrayParserArgs<TType>,
-): Parser<ReadonlyArray<TType>> {
+): Parser<readonly TType[]> {
   const separator = args.separator || defaultArraySeparator;
 
-  const arrayParser: Parser<ReadonlyArray<TType>> = serializedArray => {
+  const arrayParser: Parser<readonly TType[]> = serializedArray => {
     const serializedValues = serializedArray.split(separator);
 
     const values = serializedValues.map(args.parser);
