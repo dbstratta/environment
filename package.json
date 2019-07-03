@@ -43,7 +43,7 @@
     "@commitlint/prompt-cli": "7.6.1",
     "@commitlint/travis-cli": "7.6.1",
     "@semantic-release/changelog": "3.0.4",
-    "@semantic-release/git": "7.0.15",
+    "@semantic-release/git": "7.0.16",
     "@types/debug": "4.1.4",
     "@types/jest": "24.0.15",
     "@types/node": "11.13.16",
