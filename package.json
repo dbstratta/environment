@@ -68,7 +68,7 @@
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-unicorn": "8.0.2",
-    "husky": "2.7.0",
+    "husky": "3.0.1",
     "jest": "24.8.0",
     "lint-staged": "8.2.1",
     "prettier": "1.17.1",
