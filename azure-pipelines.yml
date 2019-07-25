@@ -73,5 +73,5 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '12.2.0'
+  defaultNodeVersion: '12.7.0'
 

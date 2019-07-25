@@ -3,7 +3,7 @@ import { Parser } from './parsers';
 import { logDebug } from './debug';
 
 export type Env<TSchemaData> = {
-  [TKey in keyof Schema<TSchemaData>]: TSchemaData[TKey]
+  [TKey in keyof TSchemaData]: TSchemaData[TKey];
 };
 
 /**
@@ -11,7 +11,7 @@ export type Env<TSchemaData> = {
  * requirements.
  */
 export type Schema<TSchemaData> = {
-  [TKey in keyof TSchemaData]: SchemaEntry<TSchemaData[TKey]>
+  [TKey in keyof TSchemaData]: SchemaEntry<TSchemaData[TKey]>;
 };
 
 export type SchemaEntry<TType> = {
@@ -33,6 +33,7 @@ export type SchemaEntry<TType> = {
 export type SchemaEntryRequiredInfo<TType> =
   | {
       required: true;
+      defaultValue?: undefined;
     }
   | {
       required: false;
@@ -46,14 +47,14 @@ export type SchemaEntryRequiredInfo<TType> =
 /**
  * Returns an env object based on a schema.
  */
-export function makeEnv<TSchemaData extends { [key: string]: any }>(
+export function makeEnv<TSchemaData extends Record<string, any>>(
   schema: Schema<TSchemaData>,
   processEnv: NodeJS.ProcessEnv = process.env,
 ): Env<TSchemaData> {
   logDebug('making env object...');
 
   const env = Object.entries(schema).reduce((acc, [key, schemaEntry]) => {
-    const value = getValue(key, schemaEntry as any, processEnv);
+    const value = getValue(key, schemaEntry, processEnv);
 
     return { ...acc, [key]: value };
   }, {}) as Env<TSchemaData>;

@@ -2,7 +2,9 @@ import { DangerDSLType, warn } from 'danger';
 
 declare const danger: DangerDSLType;
 
-const warnIfLockfileNotUpdated = () => {
+warnIfLockfileNotUpdated();
+
+function warnIfLockfileNotUpdated(): void {
   const packageChanged = danger.git.modified_files.includes('package.json');
   const lockfileChanged = danger.git.modified_files.includes('yarn.lock');
 
@@ -12,6 +14,4 @@ const warnIfLockfileNotUpdated = () => {
 
     warn(`${message} - <em>${idea}</em>`);
   }
-};
-
-warnIfLockfileNotUpdated();
+}
