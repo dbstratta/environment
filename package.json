@@ -71,7 +71,7 @@
     "jest": "24.8.0",
     "lint-staged": "9.2.1",
     "prettier": "1.18.2",
-    "rimraf": "2.6.3",
+    "rimraf": "2.7.0",
     "semantic-release": "15.13.21",
     "typescript": "3.5.3"
   },
