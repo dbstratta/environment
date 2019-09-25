@@ -54,7 +54,7 @@
     "babel-plugin-dynamic-import-node": "2.3.0",
     "codecov": "3.6.1",
     "cross-env": "5.2.1",
-    "danger": "9.2.0",
+    "danger": "9.2.1",
     "eslint": "6.4.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-prettier": "6.3.0",
