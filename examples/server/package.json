@@ -6,6 +6,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@strattadb/environment": "^4.0.0"
+    "@strattadb/environment": "^7.0.0"
   }
 }

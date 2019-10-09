@@ -57,6 +57,12 @@ module.exports = {
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-unsupported-features/node-builtins': 'off',
     'node/no-unpublished-require': 'off',
+    'node/no-missing-import': [
+      'error',
+      {
+        tryExtensions: ['.js', '.json', '.node', '.ts'],
+      },
+    ],
 
     'promise/valid-params': 'off',
 
