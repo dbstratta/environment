@@ -4,9 +4,10 @@ module.exports = {
   parser: '@typescript-eslint/parser',
 
   parserOptions: {
-    ecmaVersion: 2019,
+    ecmaVersion: 2020,
     sourceType: 'module',
     project: './tsconfig.json',
+    tsconfigRootDir: './',
   },
 
   plugins: [
@@ -17,7 +18,6 @@ module.exports = {
     'import',
     'security',
     '@typescript-eslint',
-    'fp',
     'eslint-comments',
     'prettier',
   ],
@@ -37,7 +37,6 @@ module.exports = {
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
     'plugin:eslint-comments/recommended',
-    'plugin:fp/recommended',
     'prettier',
   ],
 
@@ -51,6 +50,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'import/order': ['error', { 'newlines-between': 'always' }],
+    'import/extensions': 'off',
 
     'prettier/prettier': 'error',
 
@@ -66,12 +66,7 @@ module.exports = {
 
     'promise/valid-params': 'off',
 
-    'fp/no-mutation': 'off',
-    'fp/no-throw': 'off',
-    'fp/no-nil': 'off',
-    'fp/no-let': 'off',
-    'fp/no-unused-expression': 'off',
-    'fp/no-rest-parameters': 'off',
+    'jest/no-try-expect': 'off',
 
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-var-requires': 'off',

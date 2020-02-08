@@ -1,4 +1,4 @@
-import { isEmail, isInt, isIP, isPort, isURL } from 'validator';
+import validator from 'validator';
 
 import EnvironmentVariableError from './EnvironmentVariableError';
 
@@ -39,7 +39,7 @@ export const boolean: Parser<boolean> = serializedValue => {
  * Parses an integer.
  */
 export const integer: Parser<number> = serializedValue => {
-  if (!isInt(serializedValue)) {
+  if (!validator.isInt(serializedValue)) {
     throw new EnvironmentVariableError('value is not an integer');
   }
 
@@ -67,7 +67,7 @@ export const float: Parser<number> = serializedValue => {
 export const email: Parser<string> = serializedValue => {
   const value = serializedValue;
 
-  if (!isEmail(value)) {
+  if (!validator.isEmail(value)) {
     throw new EnvironmentVariableError('value is not an email');
   }
 
@@ -80,7 +80,7 @@ export const email: Parser<string> = serializedValue => {
 export const url: Parser<string> = serializedValue => {
   const value = serializedValue;
 
-  if (!isURL(value)) {
+  if (!validator.isURL(value)) {
     throw new EnvironmentVariableError('value is not an URL');
   }
 
@@ -93,7 +93,7 @@ export const url: Parser<string> = serializedValue => {
 export const ipAddress: Parser<string> = serializedValue => {
   const value = serializedValue;
 
-  if (!isIP(value)) {
+  if (!validator.isIP(value)) {
     throw new EnvironmentVariableError('value is not an IP address');
   }
 
@@ -104,7 +104,7 @@ export const ipAddress: Parser<string> = serializedValue => {
  * Parses a port number.
  */
 export const port: Parser<number> = serializedValue => {
-  if (!isPort(serializedValue)) {
+  if (!validator.isPort(serializedValue)) {
     throw new EnvironmentVariableError('value is not a port');
   }
 

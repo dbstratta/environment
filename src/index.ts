@@ -41,6 +41,4 @@ export {
   SchemaEntry,
   SchemaEntryRequiredInfo,
 } from './environment';
-export {
-  default as EnvironmentVariableError,
-} from './EnvironmentVariableError';
+export { default as EnvironmentVariableError } from './EnvironmentVariableError';

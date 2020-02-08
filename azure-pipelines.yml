@@ -3,18 +3,16 @@ jobs:
     displayName: 'Test'
 
     pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-latest'
 
     strategy:
       matrix:
-        node_8_x:
-          node_version: 8.x
         node_10_x:
           node_version: 10.x
-        node_11_x:
-          node_version: 11.x
         node_12_x:
           node_version: 12.x
+        node_13_x:
+          node_version: 13.x
 
     steps:
       - template: azure-pipelines/install.yml
@@ -33,7 +31,7 @@ jobs:
     displayName: 'Coverage'
 
     pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-latest'
 
     steps:
       - template: azure-pipelines/install.yml
@@ -55,7 +53,7 @@ jobs:
     dependsOn: test
 
     pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-latest'
 
     steps:
       - template: azure-pipelines/install.yml
@@ -73,5 +71,5 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '12.7.0'
+  defaultNodeVersion: '13.8.0'
 
