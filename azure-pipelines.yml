@@ -22,8 +22,8 @@ jobs:
       - script: yarn lint:check
         displayName: 'Linter check'
 
-      - script: yarn typecheck
-        displayName: 'Typecheck'
+      - script: yarn tsc
+        displayName: 'TypeScript check'
 
       - template: azure-pipelines/test.yml
 
