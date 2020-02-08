@@ -1,5 +1,29 @@
 # Changelog
 
+# [8.0.0](https://github.com/strattadb/environment/compare/v7.0.0...v8.0.0) (2020-02-08)
+
+
+### Bug Fixes
+
+* fix command in pipeline ([56f8825](https://github.com/strattadb/environment/commit/56f8825463a332450b21ead51b319e364f3e4657))
+* **deps:** update dependency validator to v11 ([a9148cc](https://github.com/strattadb/environment/commit/a9148cc3d72b82acdd357540b31adfa9894f5b7a))
+
+
+### chore
+
+* bump versions ([d581646](https://github.com/strattadb/environment/commit/d58164699e7584e650dfe1ecc65ce25242c8e908))
+
+
+### Features
+
+* improve TS types ([0251002](https://github.com/strattadb/environment/commit/02510021250e293bb927ffa8f9dc0c53ab89e98e))
+
+
+### BREAKING CHANGES
+
+* Drop support for Node versions 8 and 11.
+Bump  peer dependency to version 12.2.0.
+
 # [7.0.0](https://github.com/strattadb/environment/compare/v6.2.0...v7.0.0) (2019-05-20)
 
 
