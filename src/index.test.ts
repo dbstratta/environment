@@ -1,3 +1,5 @@
+import * as parsers from './parsers';
+
 import * as environment from '.';
 
 describe('environment', () => {
@@ -10,6 +12,14 @@ describe('environment', () => {
 
     Object.values(environment.parsers).forEach(parser => {
       expect(typeof parser).toBe('function');
+    });
+
+    Object.entries(parsers).forEach(([name, parser]) => {
+      if (typeof parser === 'function') {
+        expect(environment.parsers).toEqual(
+          expect.objectContaining({ [name]: parser }),
+        );
+      }
     });
   });
 });
