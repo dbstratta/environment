@@ -1,4 +1,5 @@
 import {
+  array,
   boolean,
   email,
   float,
@@ -17,20 +18,21 @@ import {
 } from './parsers';
 
 const parsers = {
-  string,
+  array,
   boolean,
-  integer,
-  float,
   email,
+  float,
+  integer,
   url,
   ipAddress,
-  port,
-  whitelist,
-  positiveInteger,
-  nonPositiveInteger,
   negativeInteger,
   nonNegativeInteger,
+  nonPositiveInteger,
+  port,
+  positiveInteger,
   regex,
+  string,
+  whitelist,
 };
 
 export { Parser, parsers };
