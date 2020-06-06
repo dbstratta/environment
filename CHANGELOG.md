@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.0.1](https://github.com/strattadb/environment/compare/v8.0.0...v8.0.1) (2020-06-06)
+
+
+### Bug Fixes
+
+* expose parsers.array ([998dbfc](https://github.com/strattadb/environment/commit/998dbfc84853426e0aa72382a5a1314893e36476))
+
 # [8.0.0](https://github.com/strattadb/environment/compare/v7.0.0...v8.0.0) (2020-02-08)
 
 
