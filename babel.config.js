@@ -1,18 +1,15 @@
-module.exports = api => {
-  const babelEnv = api.env();
-
-  const debug = !!process.env.DEBUG_BABEL;
-  const useBuiltIns = false;
-
+/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+module.exports = (api) => {
   const presets = [
     [
       '@babel/preset-env',
       {
         targets: {
-          node: 8,
+          node: 10,
         },
-        debug,
-        useBuiltIns,
+        debug: !!process.env.DEBUG_BABEL,
+        useBuiltIns: false,
+        bugfixes: true,
       },
     ],
     '@babel/preset-typescript',
@@ -20,9 +17,9 @@ module.exports = api => {
 
   const plugins = ['dynamic-import-node'];
 
-  const ignore = getIgnoredPaths(babelEnv);
+  const ignore = getIgnoredPaths(api);
 
-  const sourceMaps = babelEnv === 'production' ? true : 'inline';
+  const sourceMaps = api.env('production') ? true : 'inline';
 
   return {
     presets,
@@ -32,12 +29,13 @@ module.exports = api => {
   };
 };
 
-function getIgnoredPaths(babelEnv) {
+function getIgnoredPaths(api) {
   const baseIgnorePaths = ['node_modules'];
 
-  if (babelEnv === 'production') {
+  if (api.env('production')) {
     return [...baseIgnorePaths, '**/*.spec.ts', '**/*.test.ts', '**/*.d.ts'];
   }
 
   return baseIgnorePaths;
 }
+/* eslint-enable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
