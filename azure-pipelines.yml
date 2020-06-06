@@ -11,8 +11,8 @@ jobs:
           node_version: 10.x
         node_12_x:
           node_version: 12.x
-        node_13_x:
-          node_version: 13.x
+        node_14_x:
+          node_version: 14.x
 
     steps:
       - template: azure-pipelines/install.yml
@@ -45,7 +45,6 @@ jobs:
           CODECOV_TOKEN: $(CODECOV_TOKEN)
         displayName: 'Upload coverage report'
 
-
   - job: publish
     displayName: 'Publish'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
@@ -71,5 +70,4 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '13.8.0'
-
+  defaultNodeVersion: '14.4.0'

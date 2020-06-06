@@ -7,19 +7,23 @@ describe('environment', () => {
     expect(typeof environment.makeEnv).toBe('function');
   });
 
-  test('exports an object `parsers` contain parsers', () => {
+  test('exports an object `parsers` that contains parsers', () => {
     expect(typeof environment.parsers).toBe('object');
 
-    Object.values(environment.parsers).forEach(parser => {
+    Object.values(environment.parsers).forEach((parser) => {
       expect(typeof parser).toBe('function');
     });
+  });
 
+  test('the `parsers` object contains all the parsers', () => {
     Object.entries(parsers).forEach(([name, parser]) => {
       if (typeof parser === 'function') {
-        expect(environment.parsers).toEqual(
-          expect.objectContaining({ [name]: parser }),
-        );
+        return;
       }
+
+      expect(environment.parsers).toEqual(
+        expect.objectContaining({ [name]: parser }),
+      );
     });
   });
 });

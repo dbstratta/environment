@@ -7,14 +7,14 @@ export type Parser<TReturn = any> = (serializedValue: string) => TReturn;
 /**
  * Parses a string.
  */
-export const string: Parser<string> = serializedValue => serializedValue;
+export const string: Parser<string> = (serializedValue) => serializedValue;
 
 /**
  * Parses a boolean. parsed values are case insensitive.
  * Truthy values: true, 1, yes.
  * Falsy values: false, 0, no.
  */
-export const boolean: Parser<boolean> = serializedValue => {
+export const boolean: Parser<boolean> = (serializedValue) => {
   const truthyValues = ['true', '1', 'yes', 'on'];
   const falsyValues = ['false', '0', 'no', 'off'];
 
@@ -38,7 +38,7 @@ export const boolean: Parser<boolean> = serializedValue => {
 /**
  * Parses an integer.
  */
-export const integer: Parser<number> = serializedValue => {
+export const integer: Parser<number> = (serializedValue) => {
   if (!validator.isInt(serializedValue)) {
     throw new EnvironmentVariableError('value is not an integer');
   }
@@ -51,7 +51,7 @@ export const integer: Parser<number> = serializedValue => {
 /**
  * Parses a float.
  */
-export const float: Parser<number> = serializedValue => {
+export const float: Parser<number> = (serializedValue) => {
   const value = Number.parseFloat(serializedValue);
 
   if (Number.isNaN(value)) {
@@ -64,7 +64,7 @@ export const float: Parser<number> = serializedValue => {
 /**
  * Parses an email.
  */
-export const email: Parser<string> = serializedValue => {
+export const email: Parser<string> = (serializedValue) => {
   const value = serializedValue;
 
   if (!validator.isEmail(value)) {
@@ -77,7 +77,7 @@ export const email: Parser<string> = serializedValue => {
 /**
  * Parses a URL.
  */
-export const url: Parser<string> = serializedValue => {
+export const url: Parser<string> = (serializedValue) => {
   const value = serializedValue;
 
   if (!validator.isURL(value)) {
@@ -90,7 +90,7 @@ export const url: Parser<string> = serializedValue => {
 /**
  * Parses an IP address.
  */
-export const ipAddress: Parser<string> = serializedValue => {
+export const ipAddress: Parser<string> = (serializedValue) => {
   const value = serializedValue;
 
   if (!validator.isIP(value)) {
@@ -103,7 +103,7 @@ export const ipAddress: Parser<string> = serializedValue => {
 /**
  * Parses a port number.
  */
-export const port: Parser<number> = serializedValue => {
+export const port: Parser<number> = (serializedValue) => {
   if (!validator.isPort(serializedValue)) {
     throw new EnvironmentVariableError('value is not a port');
   }
@@ -120,12 +120,12 @@ export const port: Parser<number> = serializedValue => {
 export function whitelist<TValue extends string>(
   whitelistedValues: readonly TValue[],
 ): Parser<TValue> {
-  const whitelistParser: Parser<TValue> = serializedValue => {
+  const whitelistParser: Parser<TValue> = (serializedValue) => {
     const value = serializedValue;
 
     if (!(whitelistedValues as readonly string[]).includes(value)) {
       const whitelistedValuesString = whitelistedValues
-        .map(whitelistedValue => `'${whitelistedValue}'`)
+        .map((whitelistedValue) => `'${whitelistedValue}'`)
         .join(', ');
 
       throw new EnvironmentVariableError(
@@ -143,7 +143,7 @@ export function whitelist<TValue extends string>(
  * Returns a parser that parses a value matching a regular expression.
  */
 export function regex(pattern: RegExp): Parser<string> {
-  const regexParser: Parser<string> = serializedValue => {
+  const regexParser: Parser<string> = (serializedValue) => {
     const value = serializedValue;
 
     if (!pattern.test(value)) {
@@ -173,10 +173,12 @@ export function array<TType>(
 ): Parser<readonly TType[]> {
   const separator = args.separator || defaultArraySeparator;
 
-  const arrayParser: Parser<readonly TType[]> = serializedArray => {
+  const arrayParser: Parser<readonly TType[]> = (serializedArray) => {
     const serializedValues = serializedArray.split(separator);
 
-    const values = serializedValues.map(args.parser);
+    const values = serializedValues.map((serializedValue) =>
+      args.parser(serializedValue),
+    );
 
     return values;
   };
@@ -187,7 +189,7 @@ export function array<TType>(
 /**
  * Parses a positive integer.
  */
-export const positiveInteger: Parser<number> = serializedValue => {
+export const positiveInteger: Parser<number> = (serializedValue) => {
   const value = integer(serializedValue);
 
   if (value <= 0) {
@@ -200,7 +202,7 @@ export const positiveInteger: Parser<number> = serializedValue => {
 /**
  * Parses a non-positive integer.
  */
-export const nonPositiveInteger: Parser<number> = serializedValue => {
+export const nonPositiveInteger: Parser<number> = (serializedValue) => {
   const value = integer(serializedValue);
 
   if (value > 0) {
@@ -213,7 +215,7 @@ export const nonPositiveInteger: Parser<number> = serializedValue => {
 /**
  * Parses a negative integer.
  */
-export const negativeInteger: Parser<number> = serializedValue => {
+export const negativeInteger: Parser<number> = (serializedValue) => {
   const value = integer(serializedValue);
 
   if (value >= 0) {
@@ -226,7 +228,7 @@ export const negativeInteger: Parser<number> = serializedValue => {
 /**
  * Parses a non-negative integer.
  */
-export const nonNegativeInteger: Parser<number> = serializedValue => {
+export const nonNegativeInteger: Parser<number> = (serializedValue) => {
   const value = integer(serializedValue);
 
   if (value < 0) {

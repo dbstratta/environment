@@ -321,7 +321,7 @@ import { makeEnv, parsers } from '@strattadb/environment';
 
 const env = makeEnv({
   someValue: {
-    parser: value => {
+    parser: (value) => {
       if (value === 'forbiddenValue') {
         throw new Error('value is forbidden');
       }
@@ -405,7 +405,7 @@ Yes! You can have as many env objects as you want!
 ## Node.js support
 
 Node.js version 10 or higher. Every version of this library
-is tested in Node.js 10, 12 and 13.
+is tested in Node.js 10, 12 and 14.
 
 ## Contributing
 

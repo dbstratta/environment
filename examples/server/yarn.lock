@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@strattadb/environment@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@strattadb/environment/-/environment-7.0.0.tgz#d017918e23620cd68d30c4d75298a265834b5f7e"
-  integrity sha512-nextyUFe5rL2zBQlhrD4s6xLX+H0e6rPlicvJ6AGqRDXcpfCN+TSOLk04r4IuurToerPa1lV2v1G87Bslr2atQ==
+"@strattadb/environment@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@strattadb/environment/-/environment-8.0.0.tgz#702dd6d50fe0a3166f79ceb9fbeb411d10178d44"
+  integrity sha512-I7Z4orwMLMT9QygOv4uTDrRit3oac2XM/eOCCwZtg7hHem+X8c4/UUzUiyhKUVMMw3IZxbDlw0lfBoY2lHi3Gw==
   dependencies:
     debug "^4.1.1"
-    validator "^10.11.0"
+    validator "^12.2.0"
 
 debug@^4.1.1:
   version "4.1.1"
@@ -22,7 +22,7 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-validator@^10.11.0:
-  version "10.11.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
-  integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
+validator@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-12.2.0.tgz#660d47e96267033fd070096c3b1a6f2db4380a0a"
+  integrity sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ==

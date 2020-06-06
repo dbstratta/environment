@@ -14,7 +14,7 @@ describe('parsers.boolean', () => {
     const serializedTruthyValues = ['true', '1', 'yes', 'on'];
     const expectedValue = true;
 
-    serializedTruthyValues.forEach(serializedTruthyValue => {
+    serializedTruthyValues.forEach((serializedTruthyValue) => {
       expect(parsers.boolean(serializedTruthyValue)).toEqual(expectedValue);
     });
   });
@@ -23,7 +23,7 @@ describe('parsers.boolean', () => {
     const serializedFalsyValues = ['false', '0', 'no', 'off'];
     const expectedValue = false;
 
-    serializedFalsyValues.forEach(serializedFalsyValue => {
+    serializedFalsyValues.forEach((serializedFalsyValue) => {
       expect(parsers.boolean(serializedFalsyValue)).toEqual(expectedValue);
     });
   });

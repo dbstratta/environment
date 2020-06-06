@@ -23,7 +23,7 @@ module.exports = {
   ],
 
   env: {
-    es6: true,
+    es2020: true,
     jest: true,
     node: true,
   },
@@ -36,21 +36,30 @@ module.exports = {
     'plugin:jest/recommended',
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
 
   rules: {
+    'no-undef': 'off',
+    'no-unused-vars': 'off',
+    'no-restricted-globals': 'off',
+    'no-shadow': 'off',
+    'prefer-destructuring': 'off',
+    'no-multi-str': 'off',
     'no-use-before-define': 'off',
 
     'unicorn/filename-case': 'off',
     'unicorn/prevent-abbreviations': 'off',
+    'unicorn/no-reduce': 'off',
 
     'import/no-named-as-default': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'import/order': ['error', { 'newlines-between': 'always' }],
     'import/extensions': 'off',
+    'import/export': 'off',
 
     'prettier/prettier': 'error',
 
@@ -71,6 +80,13 @@ module.exports = {
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/naming-convention': 'error',
+    '@typescript-eslint/no-this-alias': 'error',
+    '@typescript-eslint/restrict-plus-operands': 'error',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/prefer-interface': 'off',
   },
 
   settings: {
@@ -80,35 +96,4 @@ module.exports = {
       },
     },
   },
-
-  overrides: [
-    {
-      files: ['**/*.ts', '**/*.tsx'],
-
-      rules: {
-        'no-undef': 'off',
-        'no-unused-vars': 'off',
-        'no-restricted-globals': 'off',
-        'no-shadow': 'off',
-        'prefer-destructuring': 'off',
-        'no-multi-str': 'off',
-
-        'react/prop-types': 'off',
-        'react/sort-comp': 'off',
-        'react/destructuring-assignment': 'off',
-
-        'import/export': 'off',
-
-        '@typescript-eslint/generic-type-naming': [
-          'error',
-          '^T[A-Z][a-zA-Z]+$',
-        ],
-        '@typescript-eslint/no-this-alias': 'error',
-        // '@typescript-eslint/restrict-plus-operands': 'error',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/indent': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off',
-      },
-    },
-  ],
 };
