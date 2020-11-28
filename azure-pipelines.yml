@@ -13,6 +13,8 @@ jobs:
           node_version: 12.x
         node_14_x:
           node_version: 14.x
+        node_15_x:
+          node_version: 15.x
 
     steps:
       - template: azure-pipelines/install.yml
@@ -70,4 +72,4 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '14.4.0'
+  defaultNodeVersion: '15.3.0'

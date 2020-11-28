@@ -128,7 +128,7 @@ describe('makeEnv', () => {
 
     const description = 'this is a description';
 
-    try {
+    expect(() => {
       makeEnv(
         {
           varWithDescription: {
@@ -140,9 +140,7 @@ describe('makeEnv', () => {
         },
         processEnv,
       );
-    } catch (error) {
-      expect((error as Error).message).toContain(description);
-    }
+    }).toThrowError(description);
   });
 
   test('uses process.env if the processEnv argument is not provided', () => {

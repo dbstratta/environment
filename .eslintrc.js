@@ -4,7 +4,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
 
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2021,
     sourceType: 'module',
     project: './tsconfig.json',
     tsconfigRootDir: './',
@@ -23,7 +23,7 @@ module.exports = {
   ],
 
   env: {
-    es2020: true,
+    es2021: true,
     jest: true,
     node: true,
   },
@@ -74,8 +74,6 @@ module.exports = {
     ],
 
     'promise/valid-params': 'off',
-
-    'jest/no-try-expect': 'off',
 
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/no-var-requires': 'off',
