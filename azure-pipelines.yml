@@ -72,4 +72,4 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '15.3.0'
+  defaultNodeVersion: '15.4.0'

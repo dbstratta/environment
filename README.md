@@ -230,7 +230,7 @@ const env = makeEnv({
 #### `parsers.array<T>({ parser: Parser<T>, separator?: string }): Parser<T>`
 
 Takes a parser and returns a parser that parses a list of values.
-The default value separator is ','.
+The default value separator is `,`.
 
 Example:
 
