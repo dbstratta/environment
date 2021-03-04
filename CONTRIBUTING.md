@@ -24,7 +24,7 @@ The CI will reject any PR that doesn't follow the guidelines,
 but you can test locally to be confident that your PR will pass CI.
 
 1. Make sure all tests pass. See [the testing section](#running-tests).
-2. Make sure the TypeScript types are ok: `yarn typecheck`.
+2. Make sure the TypeScript types are ok: `yarn tsc`.
 3. Make sure the linter doesn't complain: `yarn lint`.
 4. Your PR is good to go!
 

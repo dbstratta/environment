@@ -2,8 +2,8 @@
 
 [![Azure Pipelines](https://img.shields.io/azure-devops/build/strattadb/0d9c480f-815f-404d-8d52-50af29a893e6/1/develop.svg?style=for-the-badge)](https://dev.azure.com/strattadb/environment/_build?definitionId=1)
 [![npm](https://img.shields.io/npm/v/@strattadb/environment.svg?style=for-the-badge)](https://www.npmjs.com/package/@strattadb/environment)
-[![Codecov](https://img.shields.io/codecov/c/github/strattadb/environment/develop.svg?style=for-the-badge)](https://codecov.io/gh/strattadb/environment)
-[![David](https://img.shields.io/david/strattadb/environment.svg?style=for-the-badge)](https://david-dm.org/strattadb/environment)
+[![Codecov](https://img.shields.io/codecov/c/github/dbstratta/environment/develop.svg?style=for-the-badge)](https://codecov.io/gh/strattadb/environment)
+[![David](https://img.shields.io/david/dbstratta/environment.svg?style=for-the-badge)](https://david-dm.org/strattadb/environment)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md)
 
 Environment variable configuration for Node.js made easy.
