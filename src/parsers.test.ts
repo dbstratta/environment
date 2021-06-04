@@ -14,18 +14,18 @@ describe('parsers.boolean', () => {
     const serializedTruthyValues = ['true', '1', 'yes', 'on'];
     const expectedValue = true;
 
-    serializedTruthyValues.forEach((serializedTruthyValue) => {
+    for (const serializedTruthyValue of serializedTruthyValues) {
       expect(parsers.boolean(serializedTruthyValue)).toEqual(expectedValue);
-    });
+    }
   });
 
   test('parses a falsy value', () => {
     const serializedFalsyValues = ['false', '0', 'no', 'off'];
     const expectedValue = false;
 
-    serializedFalsyValues.forEach((serializedFalsyValue) => {
+    for (const serializedFalsyValue of serializedFalsyValues) {
       expect(parsers.boolean(serializedFalsyValue)).toEqual(expectedValue);
-    });
+    }
   });
 
   test('throws when serialized value is not valid', () => {

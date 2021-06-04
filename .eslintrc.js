@@ -49,10 +49,11 @@ module.exports = {
     'prefer-destructuring': 'off',
     'no-multi-str': 'off',
     'no-use-before-define': 'off',
+    'no-restricted-syntax': 'off',
 
     'unicorn/filename-case': 'off',
     'unicorn/prevent-abbreviations': 'off',
-    'unicorn/no-reduce': 'off',
+    'unicorn/no-array-reduce': 'off',
 
     'import/no-named-as-default': 'off',
     'import/no-extraneous-dependencies': 'off',
