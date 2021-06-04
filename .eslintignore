@@ -3,3 +3,4 @@ dist
 coverage
 /examples
 .eslintrc.js
+babel.config.js

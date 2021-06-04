@@ -7,14 +7,12 @@ jobs:
 
     strategy:
       matrix:
-        node_10_x:
-          node_version: 10.x
         node_12_x:
           node_version: 12.x
         node_14_x:
           node_version: 14.x
-        node_15_x:
-          node_version: 15.x
+        node_16_x:
+          node_version: 16.x
 
     steps:
       - template: azure-pipelines/install.yml
@@ -72,4 +70,4 @@ jobs:
 
 variables:
   CI: true
-  defaultNodeVersion: '15.4.0'
+  defaultNodeVersion: '16.3.0'
