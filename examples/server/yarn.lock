@@ -2,27 +2,27 @@
 # yarn lockfile v1
 
 
-"@strattadb/environment@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@strattadb/environment/-/environment-8.0.0.tgz#702dd6d50fe0a3166f79ceb9fbeb411d10178d44"
-  integrity sha512-I7Z4orwMLMT9QygOv4uTDrRit3oac2XM/eOCCwZtg7hHem+X8c4/UUzUiyhKUVMMw3IZxbDlw0lfBoY2lHi3Gw==
+"@strattadb/environment@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@strattadb/environment/-/environment-8.0.2.tgz#4ebcbb39d1969fad42a2a6c213bd6245f2ea4caa"
+  integrity sha512-wotQL9ju+r6+V56FLxj9Fp8T4sIsT5zxI6q5uTmNZMnXgnEiPaqlOkK3NGT0XH39UosZPzR3TRikpEBBTviV3w==
   dependencies:
-    debug "^4.1.1"
-    validator "^12.2.0"
+    debug "^4.3.1"
+    validator "^13.1.17"
 
-debug@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
+debug@^4.3.1:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
+  integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
   dependencies:
-    ms "^2.1.1"
+    ms "2.1.2"
 
-ms@^2.1.1:
+ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-validator@^12.2.0:
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-12.2.0.tgz#660d47e96267033fd070096c3b1a6f2db4380a0a"
-  integrity sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ==
+validator@^13.1.17:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
+  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
