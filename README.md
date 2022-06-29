@@ -38,7 +38,7 @@ to _your_ definition of valid. See [how to use it](#usage).
       - [`parsers.port(value: string): number`](#parsersportvalue-string-number)
       - [`parsers.whitelist(whitelistedValues: string[]): Parser<string>`](#parserswhitelistwhitelistedvalues-string-parserstring)
       - [`parsers.regex(pattern: Regex): Parser<string>`](#parsersregexpattern-regex-parserstring)
-      - [`parsers.array<T>({ parser: Parser<T>, separator?: string }): Parser<T>`](#parsersarrayt-parser-parsert-separator-string--parsert)
+      - [`parsers.array<T>({ parser: Parser<T>, separator?: string, minOccurs?: number, maxOccurs?: number }): Parser<T>`](#parsers-array)
       - [`parsers.positiveInteger(value: string): number`](#parserspositiveintegervalue-string-number)
       - [`parsers.nonPositiveInteger(value: string): number`](#parsersnonpositiveintegervalue-string-number)
       - [`parsers.negativeInteger(value: string): number`](#parsersnegativeintegervalue-string-number)
@@ -227,7 +227,7 @@ const env = makeEnv({
 });
 ```
 
-#### `parsers.array<T>({ parser: Parser<T>, separator?: string }): Parser<T>`
+#### <a name="parsers-array"></a> `parsers.array<T>({ parser: Parser<T>, separator?: string, minOccurs?: number, maxOccurs?: number }): Parser<T>`
 
 Takes a parser and returns a parser that parses a list of values.
 The default value separator is `,`.
