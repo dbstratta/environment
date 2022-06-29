@@ -208,6 +208,53 @@ describe('parsers.array', () => {
 
     expect(() => parser(serializedValue)).toThrow();
   });
+
+  test('parses an array of values with minOccurs and maxOccurs', () => {
+    const values = ['test1', 'test2', 'test3'];
+
+    const serializedValue = values.join(',');
+    const expectedValue = values;
+
+    const parser = parsers.array({
+      parser: parsers.string,
+      minOccurs: 1,
+      maxOccurs: 4,
+    });
+
+    expect(parser(serializedValue)).toEqual(expectedValue);
+  });
+
+  test('throws when minOccurs is violated', () => {
+    const values = ['test1', 'test2', 'test3'];
+
+    const serializedValue = values.join(',');
+
+    const parser = parsers.array({
+      parser: parsers.string,
+      minOccurs: 4,
+      maxOccurs: 4,
+    });
+
+    expect(() => parser(serializedValue)).toThrow(
+      'array has fewer than 4 items',
+    );
+  });
+
+  test('throws when maxOccurs is violated', () => {
+    const values = ['test1', 'test2', 'test3'];
+
+    const serializedValue = values.join(',');
+
+    const parser = parsers.array({
+      parser: parsers.string,
+      minOccurs: 1,
+      maxOccurs: 2,
+    });
+
+    expect(() => parser(serializedValue)).toThrow(
+      'array has more than 2 items',
+    );
+  });
 });
 
 describe('parsers.positiveInteger', () => {

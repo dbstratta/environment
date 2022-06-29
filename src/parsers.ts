@@ -161,6 +161,8 @@ export function regex(pattern: RegExp): Parser<string> {
 export type ArrayParserArgs<TType> = Readonly<{
   parser: Parser<TType>;
   separator?: string;
+  minOccurs?: number;
+  maxOccurs?: number;
 }>;
 
 const defaultArraySeparator = ',';
@@ -171,14 +173,30 @@ const defaultArraySeparator = ',';
 export function array<TType>(
   args: ArrayParserArgs<TType>,
 ): Parser<readonly TType[]> {
-  const separator = args.separator || defaultArraySeparator;
+  const {
+    parser,
+    separator = defaultArraySeparator,
+    minOccurs,
+    maxOccurs,
+  } = args;
 
   const arrayParser: Parser<readonly TType[]> = (serializedArray) => {
     const serializedValues = serializedArray.split(separator);
 
     const values = serializedValues.map((serializedValue) =>
-      args.parser(serializedValue),
+      parser(serializedValue),
     );
+
+    if (minOccurs !== undefined && values.length < minOccurs) {
+      throw new EnvironmentVariableError(
+        `array has fewer than ${minOccurs} items`,
+      );
+    }
+    if (maxOccurs !== undefined && values.length > maxOccurs) {
+      throw new EnvironmentVariableError(
+        `array has more than ${maxOccurs} items`,
+      );
+    }
 
     return values;
   };
