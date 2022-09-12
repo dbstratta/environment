@@ -33,7 +33,7 @@ to _your_ definition of valid. See [how to use it](#usage).
       - [`parsers.integer(value: string): number`](#parsersintegervalue-string-number)
       - [`parsers.float(value: string): number`](#parsersfloatvalue-string-number)
       - [`parsers.email(value: string): string`](#parsersemailvalue-string-string)
-      - [`parsers.url(value: string): string`](#parsersurlvalue-string-string)
+      - [`parsers.url(value: string, opts?: any): string`](#parsersurlvalue-string-string)
       - [`parsers.ipAddress(value: string): string`](#parsersipaddressvalue-string-string)
       - [`parsers.port(value: string): number`](#parsersportvalue-string-number)
       - [`parsers.whitelist(whitelistedValues: string[]): Parser<string>`](#parserswhitelistwhitelistedvalues-string-parserstring)
@@ -177,9 +177,13 @@ Ensures the value is a float.
 
 Ensures the value is an email.
 
-#### `parsers.url(value: string): string`
+#### `parsers.url(value: string, opts: any): string`
 
 Ensures the value is a url.
+
+You can also pass the optional second argument `opts` which allows you to customise the validation rules.
+
+See the `isURL` method of validator.js for a list of the options: https://github.com/validatorjs/validator.js
 
 #### `parsers.ipAddress(value: string): string`
 

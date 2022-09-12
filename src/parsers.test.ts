@@ -87,18 +87,33 @@ describe('parsers.email', () => {
 });
 
 describe('parsers.url', () => {
-  test('parses a url', () => {
-    const serializedValue = 'https://example.com';
-    const expectedValue = serializedValue;
-
-    expect(parsers.url(serializedValue)).toEqual(expectedValue);
+  test.each([
+    'https://example.com',
+    'https://withsubdomain.example.com',
+    'http://non-secure.example.com',
+    'https://withport.example.com:123',
+  ])('successfully parses the url: "%p"', (theUrl: string) => {
+    expect(parsers.url(theUrl)).toEqual(theUrl);
   });
 
-  test('throws when serialized value is not an email', () => {
-    const serializedValue = 'not_an_email';
+  test.each([
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    ['https://nodot', { require_tld: false }],
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    ['notaproto://example.com', { require_valid_protocol: false }],
+  ])(
+    'successfully parses urls with different options: "%p", options: %j',
+    (theUrl: string, opts) => {
+      expect(parsers.url(theUrl, opts)).toEqual(theUrl);
+    },
+  );
 
-    expect(() => parsers.url(serializedValue)).toThrow();
-  });
+  test.each(['not_a_url', 'https://nodot', 'notaproto://example.com'])(
+    'throws when serialized value is not a url: "%p"',
+    (theUrl: string) => {
+      expect(() => parsers.url(theUrl)).toThrow(`value is not an URL`);
+    },
+  );
 });
 
 describe('parsers.ipAddress', () => {
