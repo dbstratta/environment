@@ -2,7 +2,10 @@ import validator from 'validator';
 
 import EnvironmentVariableError from './EnvironmentVariableError';
 
-export type Parser<TReturn = any> = (serializedValue: string) => TReturn;
+export type Parser<TReturn = any> = (
+  serializedValue: string,
+  opts?: any,
+) => TReturn;
 
 /**
  * Parses a string.
@@ -77,10 +80,10 @@ export const email: Parser<string> = (serializedValue) => {
 /**
  * Parses a URL.
  */
-export const url: Parser<string> = (serializedValue) => {
+export const url: Parser<string> = (serializedValue: string, opts?: any) => {
   const value = serializedValue;
 
-  if (!validator.isURL(value)) {
+  if (!validator.isURL(value, opts)) {
     throw new EnvironmentVariableError('value is not an URL');
   }
 
